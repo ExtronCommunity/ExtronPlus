@@ -37,6 +37,8 @@ public class TrappedSigns implements Listener {
     }
 
     private void provideRedstonePower(Location loc) {
-
+        if (loc.add(1,0,0).getBlock().getType() == Material.REDSTONE_WIRE) {
+            loc.getBlock().setData((byte) 15);
+        }
     }
 }
