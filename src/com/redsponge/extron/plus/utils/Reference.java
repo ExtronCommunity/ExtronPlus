@@ -2,6 +2,7 @@ package com.redsponge.extron.plus.utils;
 
 import com.redsponge.extron.plus.ExtronPlus;
 import com.redsponge.extron.plus.item.CustomItem;
+import com.redsponge.extron.plus.item.HeatWalkerBoots;
 import com.redsponge.extron.plus.jetpack.ItemJetpack;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -20,7 +21,8 @@ public class Reference {
     public static final String JETPACK_NO_FUEL_IN_INVENTORY = ChatColor.RED + "You do not have any fuel in your inventory!";
 
     public enum ItemData {
-        JETPACK(Material.ELYTRA, "§6Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory");
+        JETPACK(Material.ELYTRA, "§6Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),
+        HEATWALK_BOOTS(Material.DIAMOND_BOOTS,"§cHeatWalker Boots","heatwalkerboots",true, HeatWalkerBoots.class,"§7Heat Walker II");
 
         private String displayName, locName;
         private boolean hasEnchantedGlint;

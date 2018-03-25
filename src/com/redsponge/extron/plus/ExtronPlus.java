@@ -2,10 +2,8 @@ package com.redsponge.extron.plus;
 
 import com.redsponge.extron.plus.commands.CommandGetCustomItem;
 import com.redsponge.extron.plus.crafting.RecipeJetpack;
-import com.redsponge.extron.plus.event.PlayerDieEvent;
-import com.redsponge.extron.plus.event.PlayerInteractionEvent;
-import com.redsponge.extron.plus.event.PlayerJoinGameEvent;
-import com.redsponge.extron.plus.event.PlayerToggleShiftEvent;
+import com.redsponge.extron.plus.enchants.HeatWalker;
+import com.redsponge.extron.plus.event.*;
 import com.redsponge.extron.plus.jetpack.JetpackHandler;
 import com.redsponge.extron.plus.utils.Reflection;
 import org.bukkit.Bukkit;
@@ -49,6 +47,7 @@ public class ExtronPlus extends JavaPlugin implements Listener {
         pm.registerEvents(new PlayerJoinGameEvent(), this);
         pm.registerEvents(new PlayerDieEvent(), this);
         pm.registerEvents(new PlayerToggleShiftEvent(), this);
+        pm.registerEvents(new ItemEnchantEvent(), this);
         pm.registerEvents(this,this);
     }
 
@@ -75,7 +74,7 @@ public class ExtronPlus extends JavaPlugin implements Listener {
     }
 
     private void registerEnchants() {
-        //customEnchants.add(new MyEnchant());
+        customEnchants.add(new HeatWalker());
         try {
             Reflection.setField(null,Enchantment.class,"acceptingNew",true);
             for (Enchantment e : customEnchants) {
