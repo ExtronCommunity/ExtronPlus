@@ -1,3 +1,8 @@
 name: ExtronPlus
 version: 0.1
 main: com.redsponge.extron.plus.ExtronPlus
+
+commands:
+  getCustomItem:
+    description: "Get a custom item!"
+    usage: "/getCustomItem <item_loc_name>"

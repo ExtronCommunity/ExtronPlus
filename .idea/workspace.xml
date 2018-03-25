@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="ExtronPlus" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="4327d7b6-2a4e-44e2-86d2-67ffb61dd699" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/commands/CommandGetCustomItem.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/crafting/RecipeJetpack.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerDieEvent.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerJoinGameEvent.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerToggleShiftEvent.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/inventory/InventoryUtils.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/item/CustomItem.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/jetpack/ItemJetpack.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/jetpack/JetpackHandler.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/ParticleEffect.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/ReflectionHandler.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/ExtronPlus.iml" afterPath="$PROJECT_DIR$/ExtronPlus.iml" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExtronPlus/com/redsponge/extron/plus/ExtronPlus.class" afterPath="$PROJECT_DIR$/out/production/ExtronPlus/com/redsponge/extron/plus/ExtronPlus.class" />
+      <change beforePath="$PROJECT_DIR$/plugin.yml" afterPath="$PROJECT_DIR$/plugin.yml" />
+      <change beforePath="$PROJECT_DIR$/src/com/redsponge/extron/plus/ExtronPlus.java" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/ExtronPlus.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/Reference.java" afterPath="$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/Reference.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,35 +37,49 @@
       <file leaf-file-name="ExtronPlus.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/ExtronPlus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="21" column="43" lean-forward="false" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerInteractionEvent.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerInteractionEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="37" lean-forward="true" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+            <state relative-caret-position="414">
+              <caret line="60" column="26" lean-forward="false" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1444#1445#0" expanded="true" />
+                <element signature="e#1527#1528#0" expanded="true" />
+                <element signature="e#1566#1567#0" expanded="true" />
+                <element signature="e#1619#1620#0" expanded="true" />
+                <element signature="e#1814#1815#0" expanded="true" />
+                <element signature="e#1872#1873#0" expanded="true" />
+                <element signature="e#1921#1922#0" expanded="true" />
+                <element signature="e#1958#1959#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HandItems.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/inventory/HandItems.java">
+      <file leaf-file-name="JetpackHandler.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/jetpack/JetpackHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="30" lean-forward="false" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
+            <state relative-caret-position="299">
+              <caret line="170" column="5" lean-forward="true" selection-start-line="170" selection-start-column="5" selection-end-line="170" selection-end-column="5" />
               <folding>
-                <element signature="e#337#338#0" expanded="true" />
-                <element signature="e#369#370#0" expanded="true" />
-                <element signature="e#411#412#0" expanded="true" />
-                <element signature="e#442#443#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#6361#6362#0" expanded="true" />
+                <element signature="e#6407#6408#0" expanded="true" />
+                <element signature="e#6955#6956#0" expanded="true" />
+                <element signature="e#6987#6988#0" expanded="true" />
+                <element signature="e#7019#7020#0" expanded="true" />
+                <element signature="e#7054#7055#0" expanded="true" />
+                <element signature="e#7096#7097#0" expanded="true" />
+                <element signature="e#7138#7139#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerToggleShiftEvent.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerToggleShiftEvent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="103" lean-forward="false" selection-start-line="12" selection-start-column="103" selection-end-line="12" selection-end-column="103" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -61,6 +94,13 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>sendMes</find>
+      <find>System</find>
+      <find>tickFl</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -73,19 +113,33 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/Template.java" />
-        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/ExtronPlus.java" />
-        <option value="$PROJECT_DIR$/plugin.yml" />
         <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerInteractEvent.java" />
         <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/inventory/HandItems.java" />
-        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerInteractionEvent.java" />
         <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/blocks/CustomBlockContainer.java" />
         <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/blocks/CustomBlock.java" />
         <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/blocks/DirectionalBlock.java" />
         <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/blocks/BlockBreaker.java" />
         <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlaceBlockEvent.java" />
         <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/blocks/TrappedSign.java" />
-        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/Reference.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerInteractionEvent.java" />
         <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/TrappedSigns.java" />
+        <option value="$PROJECT_DIR$/plugin.yml" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/item/CustomItem.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/commands/CommandGetCustomItem.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/jetpack/Jetpack.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/inventory/InventoryUtils.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerJoinEvent.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerJoinGameEvent.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/jetpack/ItemJetpack.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerDeathEvent.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerDieEvent.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/ReflectionHandler.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/ParticleEffect.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/crafting/RecipeJetpack.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/Reference.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/ExtronPlus.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerToggleShiftEvent.java" />
+        <option value="$PROJECT_DIR$/src/com/redsponge/extron/plus/jetpack/JetpackHandler.java" />
       </list>
     </option>
   </component>
@@ -94,6 +148,31 @@
     <option name="y" value="-8" />
     <option name="width" value="1346" />
     <option name="height" value="688" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Java 7Java language level migration aidsJava</id>
+          </State>
+          <State>
+            <id>Java language level migration aidsJava</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Convert2Diamond</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -131,6 +210,24 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="plus" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ExtronPlus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExtronPlus" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="plus" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ExtronPlus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExtronPlus" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="plus" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ExtronPlus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -143,8 +240,9 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ExtronPlusDep/spigot-1.12.2.jar!/" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/shiny/Desktop/SuperCity/src/com/redsponge/extron/plus/blocks/BlockBreaker.java" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -313,109 +411,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="12" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/ExtronPlus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/dep/spigot-1.12.2.jar!/org/bukkit/event/player/PlayerInteractEvent.class" />
-    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/inventory/HandItems.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="30" lean-forward="false" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
-          <folding>
-            <element signature="e#337#338#0" expanded="true" />
-            <element signature="e#369#370#0" expanded="true" />
-            <element signature="e#411#412#0" expanded="true" />
-            <element signature="e#442#443#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerInteractionEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="17" lean-forward="true" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="34" lean-forward="true" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/extron/supercity/Main.java" />
-    <entry file="jar://$PROJECT_DIR$/dep/spigot-1.12.2.jar!/org/bukkit/event/player/PlayerInteractEvent.class" />
-    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerInteractionEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="11" column="17" lean-forward="true" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/inventory/HandItems.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding>
-            <element signature="e#337#338#0" expanded="true" />
-            <element signature="e#369#370#0" expanded="true" />
-            <element signature="e#411#412#0" expanded="true" />
-            <element signature="e#442#443#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="12" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/blocks/CustomBlockContainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/blocks/CustomBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="779">
-          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/blocks/DirectionalBlock.java" />
-    <entry file="jar://$USER_HOME$/Downloads/spigot-1.12.2.jar!/net/minecraft/server/v1_12_R1/BlockStateList.class" />
-    <entry file="jar://$USER_HOME$/Downloads/spigot-1.12.2.jar!/net/minecraft/server/v1_12_R1/IBlockProperties.class" />
-    <entry file="jar://$USER_HOME$/Downloads/spigot-1.12.2.jar!/net/minecraft/server/v1_12_R1/EnumDirection.class" />
     <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/blocks/BlockBreaker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -440,6 +441,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -447,7 +449,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="16" column="58" lean-forward="true" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
-          <folding />
+          <folding>
+            <element signature="e#1444#1445#0" expanded="true" />
+            <element signature="e#1527#1528#0" expanded="true" />
+            <element signature="e#1566#1567#0" expanded="true" />
+            <element signature="e#1619#1620#0" expanded="true" />
+            <element signature="e#1921#1922#0" expanded="true" />
+            <element signature="e#1958#1959#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -463,7 +472,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#1444#1445#0" expanded="true" />
+            <element signature="e#1527#1528#0" expanded="true" />
+            <element signature="e#1566#1567#0" expanded="true" />
+            <element signature="e#1619#1620#0" expanded="true" />
+            <element signature="e#1921#1922#0" expanded="true" />
+            <element signature="e#1958#1959#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -473,10 +489,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="30" lean-forward="false" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
           <folding>
-            <element signature="e#337#338#0" expanded="true" />
-            <element signature="e#369#370#0" expanded="true" />
-            <element signature="e#411#412#0" expanded="true" />
-            <element signature="e#442#443#0" expanded="true" />
+            <element signature="e#337#338#0" expanded="false" />
+            <element signature="e#369#370#0" expanded="false" />
+            <element signature="e#411#412#0" expanded="false" />
+            <element signature="e#442#443#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -506,19 +522,11 @@
         <state relative-caret-position="0">
           <caret line="0" column="30" lean-forward="false" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
           <folding>
-            <element signature="e#337#338#0" expanded="true" />
-            <element signature="e#369#370#0" expanded="true" />
-            <element signature="e#411#412#0" expanded="true" />
-            <element signature="e#442#443#0" expanded="true" />
+            <element signature="e#337#338#0" expanded="false" />
+            <element signature="e#369#370#0" expanded="false" />
+            <element signature="e#411#412#0" expanded="false" />
+            <element signature="e#442#443#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="12" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -547,53 +555,308 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlaceBlockEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#582#583#0" expanded="false" />
-            <element signature="e#610#611#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/blocks/TrappedSign.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/Reference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="66" lean-forward="false" selection-start-line="4" selection-start-column="66" selection-end-line="4" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/Downloads/spigot-1.12.2.jar!/org/bukkit/block/Block.class" />
     <entry file="jar://$USER_HOME$/Downloads/spigot-1.12.2.jar!/org/bukkit/craftbukkit/v1_12_R1/block/CraftBlock.class" />
     <entry file="jar://$USER_HOME$/Downloads/spigot-1.12.2.jar!/org/bukkit/Location.class" />
     <entry file="jar://$USER_HOME$/Downloads/spigot-1.12.2.jar!/org/bukkit/material/RedstoneWire.class" />
-    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/ExtronPlus.java">
+    <entry file="jar://$USER_HOME$/Downloads/spigot-1.12.2.jar!/org/bukkit/material/Redstone.class" />
+    <entry file="jar://$USER_HOME$/Downloads/spigot-1.12.2.jar!/org/bukkit/Material.class" />
+    <entry file="jar://$PROJECT_DIR$/../ExtronPlusDep/spigot-1.12.2.jar!/org/bukkit/inventory/ItemStack.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="21" column="43" lean-forward="false" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
+        <state relative-caret-position="202">
+          <caret line="379" column="19" lean-forward="false" selection-start-line="379" selection-start-column="19" selection-end-line="379" selection-end-column="19" />
+          <folding>
+            <element signature="e#11749#11750#0" expanded="true" />
+            <element signature="e#11816#11817#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/TrappedSigns.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="39" column="8" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/Downloads/spigot-1.12.2.jar!/org/bukkit/material/Redstone.class" />
-    <entry file="jar://$USER_HOME$/Downloads/spigot-1.12.2.jar!/org/bukkit/Material.class" />
-    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/TrappedSigns.java">
+    <entry file="file://$PROJECT_DIR$/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="16" lean-forward="true" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/item/CustomItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="34" lean-forward="true" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#945#946#0" expanded="true" />
+            <element signature="e#972#973#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/commands/CommandGetCustomItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="84" lean-forward="false" selection-start-line="25" selection-start-column="84" selection-end-line="25" selection-end-column="84" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/io/PrintStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="542">
+          <caret line="800" column="16" lean-forward="false" selection-start-line="800" selection-start-column="16" selection-end-line="800" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/Runnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="67" column="25" lean-forward="false" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlaceBlockEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/ParticleEffect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="516" column="4" lean-forward="false" selection-start-line="516" selection-start-column="4" selection-end-line="516" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#15379#15403#0" expanded="true" />
+            <element signature="e#15481#15506#0" expanded="true" />
+            <element signature="e#17996#17997#0" expanded="true" />
+            <element signature="e#18050#18051#0" expanded="true" />
+            <element signature="e#18176#18177#0" expanded="true" />
+            <element signature="e#18203#18204#0" expanded="true" />
+            <element signature="e#18320#18321#0" expanded="true" />
+            <element signature="e#18345#18346#0" expanded="true" />
+            <element signature="e#18510#18511#0" expanded="true" />
+            <element signature="e#18548#18549#0" expanded="true" />
+            <element signature="e#18742#18743#0" expanded="true" />
+            <element signature="e#18777#18778#0" expanded="true" />
+            <element signature="e#18979#18980#0" expanded="true" />
+            <element signature="e#19015#19016#0" expanded="true" />
+            <element signature="e#35935#35967#0" expanded="true" />
+            <element signature="e#36325#36326#0" expanded="true" />
+            <element signature="e#36364#36365#0" expanded="true" />
+            <element signature="e#36513#36514#0" expanded="true" />
+            <element signature="e#36548#36549#0" expanded="true" />
+            <element signature="e#36734#36735#0" expanded="true" />
+            <element signature="e#36775#36776#0" expanded="true" />
+            <element signature="e#36968#36969#0" expanded="true" />
+            <element signature="e#37040#37041#0" expanded="true" />
+            <element signature="e#37356#37357#0" expanded="true" />
+            <element signature="e#37397#37398#0" expanded="true" />
+            <element signature="e#38016#38017#0" expanded="true" />
+            <element signature="e#38061#38062#0" expanded="true" />
+            <element signature="e#38759#38791#0" expanded="true" />
+            <element signature="e#39867#39868#0" expanded="true" />
+            <element signature="e#39905#39906#0" expanded="true" />
+            <element signature="e#40624#40625#0" expanded="true" />
+            <element signature="e#40662#40663#0" expanded="true" />
+            <element signature="e#46436#46437#0" expanded="true" />
+            <element signature="e#46474#46475#0" expanded="true" />
+            <element signature="e#46800#46801#0" expanded="true" />
+            <element signature="e#46842#46843#0" expanded="true" />
+            <element signature="e#51888#51889#0" expanded="true" />
+            <element signature="e#51941#51942#0" expanded="true" />
+            <element signature="e#52741#52742#0" expanded="true" />
+            <element signature="e#52794#52795#0" expanded="true" />
+            <element signature="e#53559#53560#0" expanded="true" />
+            <element signature="e#53612#53613#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/inventory/InventoryUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerJoinGameEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="54" lean-forward="true" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../ExtronPlusDep/spigot-1.12.2.jar!/org/bukkit/inventory/ShapedRecipe.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="87" column="24" lean-forward="false" selection-start-line="87" selection-start-column="24" selection-end-line="87" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../ExtronPlusDep/spigot-1.12.2.jar!/org/bukkit/NamespacedKey.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/jetpack/ItemJetpack.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerDieEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="73" lean-forward="false" selection-start-line="11" selection-start-column="73" selection-end-line="11" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/crafting/RecipeJetpack.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="27" lean-forward="true" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerInteractionEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="37" lean-forward="true" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+        <state relative-caret-position="408">
+          <caret line="24" column="99" lean-forward="false" selection-start-line="24" selection-start-column="99" selection-end-line="24" selection-end-column="99" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/ReflectionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="6" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#23437#23438#0" expanded="true" />
+            <element signature="e#23477#23478#0" expanded="true" />
+            <element signature="e#23714#23715#0" expanded="true" />
+            <element signature="e#23763#23764#0" expanded="true" />
+            <element signature="e#23910#23911#0" expanded="true" />
+            <element signature="e#23945#23946#0" expanded="true" />
+            <element signature="e#24516#24517#0" expanded="true" />
+            <element signature="e#24551#24552#0" expanded="true" />
+            <element signature="e#25474#25494#0" expanded="true" />
+            <element signature="e#26349#26350#0" expanded="true" />
+            <element signature="e#26389#26390#0" expanded="true" />
+            <element signature="e#26562#26563#0" expanded="true" />
+            <element signature="e#26602#26603#0" expanded="true" />
+            <element signature="e#26871#26872#0" expanded="true" />
+            <element signature="e#26922#26923#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../ExtronPlusDep/spigot-1.12.2.jar!/org/bukkit/util/Vector.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="36" column="11" lean-forward="false" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/utils/Reference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="19" column="122" lean-forward="false" selection-start-line="19" selection-start-column="122" selection-end-line="19" selection-end-column="122" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2496#2497#0" expanded="true" />
+            <element signature="e#2534#2535#0" expanded="true" />
+            <element signature="e#2576#2577#0" expanded="true" />
+            <element signature="e#2618#2619#0" expanded="true" />
+            <element signature="e#2664#2665#0" expanded="true" />
+            <element signature="e#2712#2713#0" expanded="true" />
+            <element signature="e#2748#2749#0" expanded="true" />
+            <element signature="e#2786#2787#0" expanded="true" />
+            <element signature="e#2823#2824#0" expanded="true" />
+            <element signature="e#2858#2859#0" expanded="true" />
+            <element signature="e#2899#2900#0" expanded="true" />
+            <element signature="e#2938#2939#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/event/PlayerToggleShiftEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="103" lean-forward="false" selection-start-line="12" selection-start-column="103" selection-end-line="12" selection-end-column="103" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/ExtronPlus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="60" column="26" lean-forward="false" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
+          <folding>
+            <element signature="e#1444#1445#0" expanded="true" />
+            <element signature="e#1527#1528#0" expanded="true" />
+            <element signature="e#1566#1567#0" expanded="true" />
+            <element signature="e#1619#1620#0" expanded="true" />
+            <element signature="e#1814#1815#0" expanded="true" />
+            <element signature="e#1872#1873#0" expanded="true" />
+            <element signature="e#1921#1922#0" expanded="true" />
+            <element signature="e#1958#1959#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/redsponge/extron/plus/jetpack/JetpackHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="170" column="5" lean-forward="true" selection-start-line="170" selection-start-column="5" selection-end-line="170" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6361#6362#0" expanded="true" />
+            <element signature="e#6407#6408#0" expanded="true" />
+            <element signature="e#6955#6956#0" expanded="true" />
+            <element signature="e#6987#6988#0" expanded="true" />
+            <element signature="e#7019#7020#0" expanded="true" />
+            <element signature="e#7054#7055#0" expanded="true" />
+            <element signature="e#7096#7097#0" expanded="true" />
+            <element signature="e#7138#7139#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -657,6 +920,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
