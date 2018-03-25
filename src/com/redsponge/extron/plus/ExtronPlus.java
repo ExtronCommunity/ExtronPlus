@@ -7,15 +7,25 @@ import com.redsponge.extron.plus.event.PlayerInteractionEvent;
 import com.redsponge.extron.plus.event.PlayerJoinGameEvent;
 import com.redsponge.extron.plus.event.PlayerToggleShiftEvent;
 import com.redsponge.extron.plus.jetpack.JetpackHandler;
+import com.redsponge.extron.plus.utils.Reflection;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class ExtronPlus extends JavaPlugin {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class ExtronPlus extends JavaPlugin implements Listener {
 
     public static ExtronPlus INSTANCE;
     private JetpackHandler jetpackHandler;
+
+    public List<Enchantment> customEnchants = new ArrayList<>();
 
     public void onEnable() {
         INSTANCE = this;
@@ -26,10 +36,11 @@ public class ExtronPlus extends JavaPlugin {
 
         initiatePlayers();
         getLogger().info(ChatColor.GREEN.toString() + "Extron Plus has been successfully loaded!");
+        registerEnchants();
     }
 
     public void onDisable() {
-
+        unregisterEnchants();
     }
 
     private void registerEvents() {
@@ -38,6 +49,7 @@ public class ExtronPlus extends JavaPlugin {
         pm.registerEvents(new PlayerJoinGameEvent(), this);
         pm.registerEvents(new PlayerDieEvent(), this);
         pm.registerEvents(new PlayerToggleShiftEvent(), this);
+        pm.registerEvents(this,this);
     }
 
     private void registerCommands() {
@@ -60,5 +72,46 @@ public class ExtronPlus extends JavaPlugin {
 
     public JetpackHandler getJetpackHandler() {
         return jetpackHandler;
+    }
+
+    private void registerEnchants() {
+        //customEnchants.add(new MyEnchant());
+        try {
+            Reflection.setField(null,Enchantment.class,"acceptingNew",true);
+            for (Enchantment e : customEnchants) {
+                Enchantment.registerEnchantment(e);
+                if (e instanceof Listener) {
+                    Bukkit.getPluginManager().registerEvents((Listener) e,this);
+                }
+            }
+        } catch (IllegalArgumentException ignored) {
+
+        }
+    }
+
+    private void unregisterEnchants() {
+        try {
+            HashMap<Integer, Enchantment> byId = (HashMap<Integer, Enchantment>) Reflection.getField(null, Enchantment.class, "byId");
+            HashMap<String, Enchantment> byName = (HashMap<String, Enchantment>) Reflection.getField(null, Enchantment.class, "byName");
+            for (Enchantment e : customEnchants) {
+                if (byId.containsKey(e.getId())) {
+                    byId.remove(e.getId());
+                }
+                if (byName.containsKey(e.getName())) {
+                    byName.remove(e.getName());
+                }
+            }
+        } catch (ClassCastException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public Enchantment getCustomEnchant(int id) {
+        for (Enchantment e : customEnchants) {
+            if (e.getId() == id) {
+                return e;
+            }
+        }
+        return null;
     }
 }
