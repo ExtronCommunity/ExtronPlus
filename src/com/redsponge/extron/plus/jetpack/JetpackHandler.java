@@ -73,13 +73,15 @@ public class JetpackHandler {
         for(Player p : ExtronPlus.INSTANCE.getServer().getOnlinePlayers()) {
             boolean added = false;
             if(p.getInventory().getChestplate() != null) {
-                if (p.getInventory().getChestplate().getItemMeta().getLocalizedName().equalsIgnoreCase(Reference.ItemData.JETPACK.getLocName())) {
-                    if (p.getLocation().getPitch() >= 85) {
-                        if (p.isSneaking()) {
-                            if(!flying.contains(p)) {
-                                addPlayerToFlight(p);
+                if(p.getInventory().getChestplate().getItemMeta().getLocalizedName() != null) {
+                    if (p.getInventory().getChestplate().getItemMeta().getLocalizedName().equalsIgnoreCase(Reference.ItemData.JETPACK.getLocName())) {
+                        if (p.getLocation().getPitch() >= 85) {
+                            if (p.isSneaking()) {
+                                if (!flying.contains(p)) {
+                                    addPlayerToFlight(p);
+                                }
+                                added = true;
                             }
-                            added = true;
                         }
                     }
                 }

@@ -2,6 +2,7 @@ package com.redsponge.extron.plus;
 
 import com.redsponge.extron.plus.commands.CommandGetCustomItem;
 import com.redsponge.extron.plus.crafting.RecipeJetpack;
+import com.redsponge.extron.plus.enchants.CurseOfBreaking;
 import com.redsponge.extron.plus.event.PlayerDieEvent;
 import com.redsponge.extron.plus.event.PlayerInteractionEvent;
 import com.redsponge.extron.plus.event.PlayerJoinGameEvent;
@@ -75,7 +76,7 @@ public class ExtronPlus extends JavaPlugin implements Listener {
     }
 
     private void registerEnchants() {
-        //customEnchants.add(new MyEnchant());
+        customEnchants.add(new CurseOfBreaking());
         try {
             Reflection.setField(null,Enchantment.class,"acceptingNew",true);
             for (Enchantment e : customEnchants) {

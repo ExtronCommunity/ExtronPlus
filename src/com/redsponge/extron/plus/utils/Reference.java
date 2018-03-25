@@ -2,6 +2,7 @@ package com.redsponge.extron.plus.utils;
 
 import com.redsponge.extron.plus.ExtronPlus;
 import com.redsponge.extron.plus.item.CustomItem;
+import com.redsponge.extron.plus.item.PickaxeCurseOfBreaking;
 import com.redsponge.extron.plus.jetpack.ItemJetpack;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -18,9 +19,11 @@ public class Reference {
     public static final String INVALID_ITEM_LOC_NAME = ChatColor.DARK_RED + "%name is not a valid name!";
     public static final String SUCCESSFULLY_ADDED_ITEM  = ChatColor.GREEN + "Item %name was added to your inventory!";
     public static final String JETPACK_NO_FUEL_IN_INVENTORY = ChatColor.RED + "You do not have any fuel in your inventory!";
+    public static String DEATH_MESSAGE_JETPACK = "%name enjoyed jetpacks too much";
 
     public enum ItemData {
-        JETPACK(Material.ELYTRA, "§6Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory");
+        JETPACK(Material.ELYTRA, "§6Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),
+        PICK(Material.DIAMOND_PICKAXE, "DiamondPickaxe", "BreakingPickaxe", false, PickaxeCurseOfBreaking.class, "§cCurse of Breaking");
 
         private String displayName, locName;
         private boolean hasEnchantedGlint;
@@ -36,6 +39,7 @@ public class Reference {
             this.lore = lore;
             this.hasEnchantedGlint = hasEnchantedGlint;
             this.itemClass = itemClass;
+            System.out.println(locName);
             hasLore = true;
         }
 
@@ -81,6 +85,7 @@ public class Reference {
             List<String> l = new ArrayList<>();
             for(ItemData data : ItemData.values()) {
                 l.add(data.locName);
+                System.out.println(data.locName);
             }
             return l;
         }
