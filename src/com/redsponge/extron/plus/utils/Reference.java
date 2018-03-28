@@ -1,13 +1,11 @@
 package com.redsponge.extron.plus.utils;
 
-import com.redsponge.extron.plus.ExtronPlus;
 import com.redsponge.extron.plus.item.CustomItem;
-import com.redsponge.extron.plus.item.PickaxeCurseOfBreaking;
 import com.redsponge.extron.plus.item.HeatWalkerBoots;
+import com.redsponge.extron.plus.item.PickaxeCurseOfBreaking;
 import com.redsponge.extron.plus.jetpack.ItemJetpack;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 
 import java.util.ArrayList;
 import java.util.List;
