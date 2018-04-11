@@ -187,7 +187,8 @@ public class JetpackHandler {
     public enum FuelType {
         COAL(Material.COAL, 100, ChatColor.BLACK + "Coal"),
         COAL_BLOCK(Material.COAL_BLOCK, 1000, ChatColor.BLACK + "Block of Coal"),
-        BLAZE_ROD(Material.BLAZE_ROD, 1200, ChatColor.GOLD + "Blaze rod");
+        BLAZE_ROD(Material.BLAZE_ROD, 150, ChatColor.GOLD + "Blaze rod"),
+        LAVA_BUCKET(Material.LAVA_BUCKET, 1250, ChatColor.GOLD + "Lava " + ChatColor.GRAY + "Bucket");
 
 
         private Material m;

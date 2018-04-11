@@ -10,12 +10,11 @@ public class RecipeJetpack extends ShapedRecipe {
 
     public RecipeJetpack() {
         super(new NamespacedKey(ExtronPlus.INSTANCE, "recipeJetPack"), new ItemJetpack());
-        shape("FNF","CEC","BSB");
-        setIngredient('F', Material.FIREWORK);
-        setIngredient('N', Material.NETHER_STAR);
-        setIngredient('C', Material.COAL);
+        shape("DED","BIB","C C");
+        setIngredient('D', Material.DIAMOND_BLOCK);
+        setIngredient('B', Material.BLAZE_ROD);
+        setIngredient('I', Material.IRON_BLOCK);
         setIngredient('E', Material.ELYTRA);
-        setIngredient('B', Material.BLAZE_POWDER);
-        setIngredient('S', Material.FLINT_AND_STEEL);
+        setIngredient('C', Material.COAL);
     }
 }

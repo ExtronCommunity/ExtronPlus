@@ -9,7 +9,9 @@ import com.redsponge.extron.plus.event.PlayerInteractionEvent;
 import com.redsponge.extron.plus.event.PlayerJoinGameEvent;
 import com.redsponge.extron.plus.event.PlayerToggleShiftEvent;
 import com.redsponge.extron.plus.event.*;
+import com.redsponge.extron.plus.event.custom.CustomEventListener;
 import com.redsponge.extron.plus.jetpack.JetpackHandler;
+import com.redsponge.extron.plus.spawner.SpawnerMovingHandler;
 import com.redsponge.extron.plus.utils.Reflection;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -53,6 +55,8 @@ public class ExtronPlus extends JavaPlugin implements Listener {
         pm.registerEvents(new PlayerDieEvent(), this);
         pm.registerEvents(new PlayerToggleShiftEvent(), this);
         pm.registerEvents(new ItemEnchantEvent(), this);
+        pm.registerEvents(new CustomEventListener(), this);
+        pm.registerEvents(new SpawnerMovingHandler(), this);
         pm.registerEvents(this,this);
     }
 
