@@ -1,8 +1,10 @@
 package com.redsponge.extron.plus.sleep;
 
 import com.redsponge.extron.plus.ExtronPlus;
+import com.redsponge.extron.plus.utils.Reference;
+import com.redsponge.extron.plus.utils.WorldUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ClickEvent.Action;
+import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -14,6 +16,7 @@ import org.bukkit.event.player.PlayerBedLeaveEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SleepSkippingHandler implements Listener {
 
@@ -21,21 +24,43 @@ public class SleepSkippingHandler implements Listener {
     private List<Player> inBed;
     private boolean doSkipNight;
 
+    private final TextComponent cancelSleep;
+    private final TextComponent playerSleeping;
+    private final Random random;
     public SleepSkippingHandler() {
         skipCooldown = 0;
         inBed = new ArrayList<>();
         doSkipNight = true;
+        this.random = new Random();
+        playerSleeping = new TextComponent();
+        cancelSleep = new TextComponent(Reference.CANCEL_SLEEP);
+        cancelSleep.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/dontskipnight"));
+        cancelSleep.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponent[] {new TextComponent("Click me to cancel one player sleep for this night!")}));
+
         Bukkit.getScheduler().scheduleSyncRepeatingTask(ExtronPlus.INSTANCE, () -> tick(), 0, 1);
     }
 
     @EventHandler
     public void onPlayerEnterBed(PlayerBedEnterEvent e) {
-        inBed.add(e.getPlayer());
-        for(Player p : Bukkit.getOnlinePlayers()) {
-            TextComponent component = new TextComponent("Hullo");
-            component.setClickEvent(new ClickEvent(Action.RUN_COMMAND, "/dontskipnight"));
-            p.sendMessage(component.toString());
+        if(doSkipNight) {
+            if(inBed.isEmpty()) {
+                playerSleeping.setText(Reference.PLAYER_ENTERED_BED.replaceAll("%player", e.getPlayer().getDisplayName()));
+                cancelSleep.setText(Reference.CANCEL_SLEEP);
+            } else if(inBed.size() == 1) {
+                playerSleeping.setText(Reference.ANOTHER_PLAYER_ENTERED_BED.replaceAll("%player", e.getPlayer().getDisplayName()));
+                cancelSleep.setText(Reference.CANCEL_SLEEP_2_PEOPLE);
+            } else if(inBed.size() == 2) {
+                playerSleeping.setText(Reference.PLAYER_3_ENTERED_BED.replaceAll("%player1", inBed.get(0).getDisplayName()).replaceAll("%player2", inBed.get(1).getDisplayName()).replaceAll("%player", e.getPlayer().getDisplayName()));
+                cancelSleep.setText(Reference.CANCEL_SLEEP_3_PEOPLE);
+            } else {
+                playerSleeping.setText(Reference.PLAYER_4_ENTERED_BED[random.nextInt(Reference.PLAYER_4_ENTERED_BED.length)].replaceAll("%player", e.getPlayer().getDisplayName()));
+                cancelSleep.setText(Reference.CANCEL_SLEEP_4_PEOPLE[random.nextInt(Reference.CANCEL_SLEEP_4_PEOPLE.length)]);
+            }
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                p.spigot().sendMessage(playerSleeping, cancelSleep);
+            }
         }
+        inBed.add(e.getPlayer());
     }
 
     @EventHandler
@@ -46,8 +71,8 @@ public class SleepSkippingHandler implements Listener {
     private void tick() {
         if(inBed.size() > 0) {
             if(skipCooldown == 0) {
-                skipCooldown = 20;
-            } else {
+                skipCooldown = Reference.ONE_PLAYER_SLEEP_COOLDOWN;
+            } else if(doSkipNight){
                 skipCooldown--;
                 if(skipCooldown <= 0) {
                     skipNight();
@@ -55,14 +80,19 @@ public class SleepSkippingHandler implements Listener {
                 }
             }
         }
+        if(WorldUtils.getOverworld().getTime() == 0){
+            System.out.println("Reseting one player sleep");
+            doSkipNight = true;
+            skipCooldown = 0;
+        }
     }
 
     private void skipNight() {
         World overworld = inBed.get(0).getWorld();
-        System.out.println(overworld.getTime());
-        System.out.println(overworld.getFullTime());
         overworld.setFullTime(overworld.getFullTime() + 24000 - overworld.getTime());
         overworld.setStorm(false);
+        doSkipNight = true;
+        skipCooldown = 0;
     }
 
     public void setDoSkipNight(boolean doSkipNight) {
@@ -71,5 +101,9 @@ public class SleepSkippingHandler implements Listener {
 
     public boolean isDoSkipNight() {
         return doSkipNight;
+    }
+
+    public List<Player> getInBed() {
+        return inBed;
     }
 }
