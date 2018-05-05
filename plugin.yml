@@ -6,3 +6,6 @@ commands:
   getCustomItem:
     description: "Get a custom item!"
     usage: "/getCustomItem <item_loc_name>"
+  dontSkipNight:
+    description: "Disables one-player-sleep for one night"
+    usage: "/dontskipnight"

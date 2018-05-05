@@ -18,6 +18,8 @@ public class Reference {
     public static final String INVALID_ITEM_LOC_NAME = ChatColor.DARK_RED + "%name is not a valid name!";
     public static final String SUCCESSFULLY_ADDED_ITEM  = ChatColor.GREEN + "Item %name was added to your inventory!";
     public static final String JETPACK_NO_FUEL_IN_INVENTORY = ChatColor.RED + "You do not have any fuel in your inventory!";
+    public static final String PLAYER_ENTERED_BED = "§a%player is sleeping. ";
+    public static final String CANCEL_SLEEP = "§c[NONONOANONOFNDODNFOSNOFNSODNOFSNDOFNSDONFOSNWDOFNOSNFOSDNOANOANASNOANO]";
     public static String DEATH_MESSAGE_JETPACK = "%name enjoyed jetpacks too much";
 
     public enum ItemData {

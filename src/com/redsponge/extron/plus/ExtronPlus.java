@@ -1,5 +1,6 @@
 package com.redsponge.extron.plus;
 
+import com.redsponge.extron.plus.commands.CommandDontSkipNight;
 import com.redsponge.extron.plus.commands.CommandGetCustomItem;
 import com.redsponge.extron.plus.crafting.RecipeJetpack;
 import com.redsponge.extron.plus.enchants.CurseOfBreaking;
@@ -11,6 +12,7 @@ import com.redsponge.extron.plus.event.PlayerToggleShiftEvent;
 import com.redsponge.extron.plus.event.*;
 import com.redsponge.extron.plus.event.custom.CustomEventListener;
 import com.redsponge.extron.plus.jetpack.JetpackHandler;
+import com.redsponge.extron.plus.sleep.SleepSkippingHandler;
 import com.redsponge.extron.plus.spawner.SpawnerMovingHandler;
 import com.redsponge.extron.plus.utils.Reflection;
 import org.bukkit.Bukkit;
@@ -29,12 +31,14 @@ public class ExtronPlus extends JavaPlugin implements Listener {
 
     public static ExtronPlus INSTANCE;
     private JetpackHandler jetpackHandler;
+    private SleepSkippingHandler sleepSkippingHandler;
 
     public List<Enchantment> customEnchants = new ArrayList<>();
 
     public void onEnable() {
         INSTANCE = this;
         registerCommands();
+        sleepSkippingHandler = new SleepSkippingHandler();
         registerEvents();
         registerHandlers();
         registerRecipes();
@@ -58,10 +62,12 @@ public class ExtronPlus extends JavaPlugin implements Listener {
         pm.registerEvents(new CustomEventListener(), this);
         pm.registerEvents(new SpawnerMovingHandler(), this);
         pm.registerEvents(this,this);
+        pm.registerEvents(sleepSkippingHandler, this);
     }
 
     private void registerCommands() {
         getCommand("getCustomItem").setExecutor(new CommandGetCustomItem());
+        getCommand("dontSkipNight").setExecutor(new CommandDontSkipNight());
     }
 
     private void registerHandlers() {
@@ -122,5 +128,9 @@ public class ExtronPlus extends JavaPlugin implements Listener {
             }
         }
         return null;
+    }
+
+    public SleepSkippingHandler getSleepSkippingHandler() {
+        return sleepSkippingHandler;
     }
 }
