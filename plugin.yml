@@ -9,3 +9,6 @@ commands:
   dontSkipNight:
     description: "Disables one-player-sleep for one night"
     usage: "/dontskipnight"
+  enableOnePlayerSleep:
+    description: "Re enables on-player-sleep!"
+    usage: "/enableoneplayersleep"

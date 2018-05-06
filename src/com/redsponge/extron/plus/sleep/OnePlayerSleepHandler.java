@@ -7,6 +7,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class SleepSkippingHandler implements Listener {
+public class OnePlayerSleepHandler implements Listener {
 
     private int skipCooldown;
     private List<Player> inBed;
@@ -27,7 +28,7 @@ public class SleepSkippingHandler implements Listener {
     private final TextComponent cancelSleep;
     private final TextComponent playerSleeping;
     private final Random random;
-    public SleepSkippingHandler() {
+    public OnePlayerSleepHandler() {
         skipCooldown = 0;
         inBed = new ArrayList<>();
         doSkipNight = true;
@@ -35,25 +36,25 @@ public class SleepSkippingHandler implements Listener {
         playerSleeping = new TextComponent();
         cancelSleep = new TextComponent(Reference.CANCEL_SLEEP);
         cancelSleep.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/dontskipnight"));
-        cancelSleep.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponent[] {new TextComponent("Click me to cancel one player sleep for this night!")}));
+        cancelSleep.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponent[] {new TextComponent(Reference.CANCEL_SLEEP_HOVER_MESSAGE)}));
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(ExtronPlus.INSTANCE, () -> tick(), 0, 1);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(ExtronPlus.INSTANCE, this::tick, 0, 1);
     }
 
     @EventHandler
     public void onPlayerEnterBed(PlayerBedEnterEvent e) {
         if(doSkipNight) {
             if(inBed.isEmpty()) {
-                playerSleeping.setText(Reference.PLAYER_ENTERED_BED.replaceAll("%player", e.getPlayer().getDisplayName()));
+                playerSleeping.setText(Reference.PLAYER_ENTERED_BED.replaceAll("%player", e.getPlayer().getDisplayName()) + " ");
                 cancelSleep.setText(Reference.CANCEL_SLEEP);
             } else if(inBed.size() == 1) {
-                playerSleeping.setText(Reference.ANOTHER_PLAYER_ENTERED_BED.replaceAll("%player", e.getPlayer().getDisplayName()));
+                playerSleeping.setText(Reference.ANOTHER_PLAYER_ENTERED_BED.replaceAll("%player", e.getPlayer().getDisplayName()) + " ");
                 cancelSleep.setText(Reference.CANCEL_SLEEP_2_PEOPLE);
             } else if(inBed.size() == 2) {
-                playerSleeping.setText(Reference.PLAYER_3_ENTERED_BED.replaceAll("%player1", inBed.get(0).getDisplayName()).replaceAll("%player2", inBed.get(1).getDisplayName()).replaceAll("%player", e.getPlayer().getDisplayName()));
+                playerSleeping.setText(Reference.PLAYER_3_ENTERED_BED.replaceAll("%player1", inBed.get(0).getDisplayName()).replaceAll("%player2", inBed.get(1).getDisplayName()).replaceAll("%player", e.getPlayer().getDisplayName()) + " ");
                 cancelSleep.setText(Reference.CANCEL_SLEEP_3_PEOPLE);
             } else {
-                playerSleeping.setText(Reference.PLAYER_4_ENTERED_BED[random.nextInt(Reference.PLAYER_4_ENTERED_BED.length)].replaceAll("%player", e.getPlayer().getDisplayName()));
+                playerSleeping.setText(Reference.PLAYER_4_ENTERED_BED[random.nextInt(Reference.PLAYER_4_ENTERED_BED.length)].replaceAll("%player", e.getPlayer().getDisplayName()) + " ");
                 cancelSleep.setText(Reference.CANCEL_SLEEP_4_PEOPLE[random.nextInt(Reference.CANCEL_SLEEP_4_PEOPLE.length)]);
             }
             for (Player p : Bukkit.getOnlinePlayers()) {
@@ -65,6 +66,7 @@ public class SleepSkippingHandler implements Listener {
 
     @EventHandler
     public void onPlayerLeaveBed(PlayerBedLeaveEvent e) {
+        Bukkit.broadcastMessage(ChatColor.GREEN + e.getPlayer().getDisplayName() + " left the bed");
         inBed.remove(e.getPlayer());
     }
 
