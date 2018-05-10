@@ -18,7 +18,18 @@ public class Reference {
     public static final String INVALID_ITEM_LOC_NAME = ChatColor.DARK_RED + "%name is not a valid name!";
     public static final String SUCCESSFULLY_ADDED_ITEM  = ChatColor.GREEN + "Item %name was added to your inventory!";
     public static final String JETPACK_NO_FUEL_IN_INVENTORY = ChatColor.RED + "You do not have any fuel in your inventory!";
-    public static String DEATH_MESSAGE_JETPACK = "%name enjoyed jetpacks too much";
+    public static final String PLAYER_ENTERED_BED = "§a%player is sleeping.";
+    public static final String ANOTHER_PLAYER_ENTERED_BED = "§a%player is also sleeping";
+    public static final String PLAYER_3_ENTERED_BED = "§a%player saw %player1 and %player2 are §asleeping, §aand wanted to join the party";
+    public static final String CANCEL_SLEEP = "§4[NO]";
+    public static final String CANCEL_SLEEP_2_PEOPLE = "§4[PLS NO]";
+    public static final String CANCEL_SLEEP_3_PEOPLE = "§4[NO I WANT THE NIGHT]";
+    public static final String[] PLAYER_4_ENTERED_BED = {"§aSuddenly, %player hopped into a bed","§a%player was tired","§a%player was afraid of phantoms, and so he went to sleep"};
+    public static final String[] CANCEL_SLEEP_4_PEOPLE = {"§4[...]","§4[WHY EVEN, SOMEONE ELSE IS ALREADY SLEEPING]","§4[BUT I WANT DA NITE PLZ]","§4[IM HUNTING MONSTERS.. DO NOT DISTURB]"};
+    public static final String CANCEL_SLEEP_HOVER_MESSAGE = "Click me to cancel one player sleep for this night";
+    public static final String DEATH_MESSAGE_JETPACK = "%name enjoyed jetpacks too much";
+
+    public static final int ONE_PLAYER_SLEEP_COOLDOWN = 5000;
 
     public enum ItemData {
         JETPACK(Material.ELYTRA, "§6Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),
