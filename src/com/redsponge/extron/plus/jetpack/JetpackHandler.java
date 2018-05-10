@@ -9,6 +9,7 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -112,6 +113,9 @@ public class JetpackHandler {
                     Material m = t.getMaterial();
                     if(p.getInventory().contains(m)) {
                         InventoryUtils.removeOneItemFromInventory(p, m);
+                        if(t.hasReturnType()) {
+                            p.getInventory().addItem(new ItemStack(t.getReturnType(), 1));
+                        }
                         fuelConsumption.put(p, t.getFuel());
                         lastMaterialConsumed.put(p, t);
                         usedFuel = true;
@@ -188,17 +192,21 @@ public class JetpackHandler {
         COAL(Material.COAL, 100, ChatColor.BLACK + "Coal"),
         COAL_BLOCK(Material.COAL_BLOCK, 1000, ChatColor.BLACK + "Block of Coal"),
         BLAZE_ROD(Material.BLAZE_ROD, 150, ChatColor.GOLD + "Blaze rod"),
-        LAVA_BUCKET(Material.LAVA_BUCKET, 1250, ChatColor.GOLD + "Lava " + ChatColor.GRAY + "Bucket");
+        LAVA_BUCKET(Material.LAVA_BUCKET, 1250, ChatColor.GOLD + "Lava " + ChatColor.GRAY + "Bucket", Material.BUCKET);
 
 
         private Material m;
         private int fuel;
         private String displayName;
-
+        private Material returnType;
         FuelType(Material m, int fuel, String displayName) {
             this.m = m;
             this.fuel = fuel;
             this.displayName = displayName;
+        }
+        FuelType(Material m, int fuel, String displayName, Material returnType) {
+            this(m, fuel, displayName);
+            this.returnType = returnType;
         }
 
         public Material getMaterial() {
@@ -211,6 +219,14 @@ public class JetpackHandler {
 
         public String getDisplayName() {
             return displayName;
+        }
+
+        public boolean hasReturnType() {
+            return returnType != null;
+        }
+
+        public Material getReturnType() {
+            return returnType;
         }
     }
 }
