@@ -1,6 +1,7 @@
 package com.redsponge.extron.plus.event;
 
 import com.redsponge.extron.plus.inventory.HandItems;
+import com.redsponge.extron.plus.utils.Reference.ItemData;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -8,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class PlayerInteractionEvent implements Listener{
 
@@ -32,6 +34,14 @@ public class PlayerInteractionEvent implements Listener{
      */
     public void onPlayerRightClickAir(Player player, HandItems heldItems) {
         //player.sendMessage("Right Click Air!");
+        if(heldItems.getRightHandItem().hasItemMeta() && heldItems.getRightHandItem().getItemMeta().hasLocalizedName()) {
+            if(heldItems.getRightHandItem().getItemMeta().getLocalizedName().equals(ItemData.CRAFTING_TABLE_STICK.getLocName())) {
+                player.openWorkbench(player.getLocation(), true);
+            }
+        }
+
+
+
     }
 
     /**
@@ -53,6 +63,12 @@ public class PlayerInteractionEvent implements Listener{
      */
     public void onPlayerRightClickBlock(Player player, Block block, BlockFace clickedFace) {
         //player.sendMessage("Right Click Block!");
+        ItemStack rightHandItem = player.getInventory().getItemInMainHand();
+        if(rightHandItem.hasItemMeta() && rightHandItem.getItemMeta().hasLocalizedName()) {
+            if(rightHandItem.getItemMeta().getLocalizedName().equals(ItemData.CRAFTING_TABLE_STICK.getLocName())) {
+                player.openWorkbench(player.getLocation(), true);
+            }
+        }
     }
 
     /**

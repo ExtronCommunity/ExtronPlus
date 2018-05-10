@@ -3,6 +3,7 @@ package com.redsponge.extron.plus;
 import com.redsponge.extron.plus.commands.CommandReEnableOnePlayerSleep;
 import com.redsponge.extron.plus.commands.CommandDontSkipNight;
 import com.redsponge.extron.plus.commands.CommandGetCustomItem;
+import com.redsponge.extron.plus.crafting.RecipeCraftingStick;
 import com.redsponge.extron.plus.crafting.RecipeJetpack;
 import com.redsponge.extron.plus.enchants.CurseOfBreaking;
 import com.redsponge.extron.plus.enchants.HeatWalker;
@@ -84,6 +85,7 @@ public class ExtronPlus extends JavaPlugin implements Listener {
 
     private void registerRecipes() {
         getServer().addRecipe(new RecipeJetpack());
+        getServer().addRecipe(new RecipeCraftingStick());
     }
 
     public JetpackHandler getJetpackHandler() {

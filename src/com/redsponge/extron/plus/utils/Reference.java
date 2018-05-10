@@ -1,5 +1,6 @@
 package com.redsponge.extron.plus.utils;
 
+import com.redsponge.extron.plus.item.CraftingTableStick;
 import com.redsponge.extron.plus.item.CustomItem;
 import com.redsponge.extron.plus.item.HeatWalkerBoots;
 import com.redsponge.extron.plus.item.PickaxeCurseOfBreaking;
@@ -34,6 +35,7 @@ public class Reference {
     public enum ItemData {
         JETPACK(Material.ELYTRA, "§6Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),
         PICK(Material.DIAMOND_PICKAXE, "DiamondPickaxe", "BreakingPickaxe", false, PickaxeCurseOfBreaking.class, "§cCurse of Breaking"),
+        CRAFTING_TABLE_STICK(Material.STICK, "§6Crafting Table on a stick", "craftingTableStick", true, CraftingTableStick.class),
         HEATWALK_BOOTS(Material.DIAMOND_BOOTS,"§cHeatWalker Boots","heatwalkerboots",true, HeatWalkerBoots.class,"§7Heat Walker II");
 
         private String displayName, locName;
@@ -59,7 +61,7 @@ public class Reference {
         }
 
         ItemData(Material material, String displayName, String locName, Class<? extends CustomItem> itemClass) {
-            this(material, displayName, locName,itemClass,  null);
+            this(material, displayName, locName,itemClass, null);
             hasLore = false;
         }
 
