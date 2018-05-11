@@ -30,7 +30,7 @@ public class Reference {
     public static final String CANCEL_SLEEP_HOVER_MESSAGE = "Click me to cancel one player sleep for this night";
     public static final String DEATH_MESSAGE_JETPACK = "%name enjoyed jetpacks too much";
 
-    public static final int ONE_PLAYER_SLEEP_COOLDOWN = 5000;
+    public static final int ONE_PLAYER_SLEEP_COOLDOWN = 80;
 
     public enum ItemData {
         JETPACK(Material.ELYTRA, "§6Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),
