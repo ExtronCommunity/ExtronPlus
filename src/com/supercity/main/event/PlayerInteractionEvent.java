@@ -37,11 +37,10 @@ public class PlayerInteractionEvent implements Listener{
         if(heldItems.getRightHandItem().hasItemMeta() && heldItems.getRightHandItem().getItemMeta().hasLocalizedName()) {
             if(heldItems.getRightHandItem().getItemMeta().getLocalizedName().equals(ItemData.CRAFTING_TABLE_STICK.getLocName())) {
                 player.openWorkbench(player.getLocation(), true);
+            } else if(heldItems.getRightHandItem().getItemMeta().getLocalizedName().equals(ItemData.BACKPACK.getLocName())) {
+                
             }
         }
-
-
-
     }
 
     /**

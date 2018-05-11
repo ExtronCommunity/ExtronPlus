@@ -3,6 +3,7 @@ package com.supercity.main;
 import com.supercity.main.commands.CommandDontSkipNight;
 import com.supercity.main.commands.CommandGetCustomItem;
 import com.supercity.main.commands.CommandReEnableOnePlayerSleep;
+import com.supercity.main.config.ConfigManager;
 import com.supercity.main.crafting.RecipeCraftingStick;
 import com.supercity.main.crafting.RecipeJetpack;
 import com.supercity.main.enchants.CurseOfBreaking;
@@ -48,6 +49,7 @@ public class SuperCity extends JavaPlugin implements Listener {
         initiatePlayers();
         getLogger().info(ChatColor.GREEN.toString() + "Extron Plus has been successfully loaded!");
         registerEnchants();
+        ConfigManager.init();
     }
 
     public void onDisable() {
