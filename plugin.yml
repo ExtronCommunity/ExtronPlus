@@ -1,6 +1,6 @@
-name: ExtronPlus
+name: SuperCity
 version: 0.1
-main: com.redsponge.extron.plus.ExtronPlus
+main: com.supercity.main.SuperCity
 
 commands:
   getCustomItem:
