@@ -6,6 +6,7 @@ import com.supercity.main.nbt.NBTUtils;
 import com.supercity.main.utils.Reference;
 import com.supercity.main.utils.Reference.ItemData;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -13,6 +14,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -31,6 +33,7 @@ public class ItemBackPack extends CustomItem {
     public static void assignID(ItemStack item) {
         ItemMeta meta = item.getItemMeta();
         meta.setLocalizedName(ItemData.BACKPACK.getLocName() + idCount);
+        meta.setLore(Collections.singletonList(ChatColor.GRAY + "#" + idCount));
         System.out.println("Assigned id " + idCount + " to backpack!");
         item.setItemMeta(meta);
         idCount++;
