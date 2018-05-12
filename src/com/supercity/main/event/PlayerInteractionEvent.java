@@ -1,5 +1,6 @@
 package com.supercity.main.event;
 
+import com.supercity.main.backpack.ItemBackPack;
 import com.supercity.main.inventory.HandItems;
 import com.supercity.main.utils.Reference.ItemData;
 import org.bukkit.block.Block;
@@ -37,11 +38,13 @@ public class PlayerInteractionEvent implements Listener{
         if(heldItems.getRightHandItem().hasItemMeta() && heldItems.getRightHandItem().getItemMeta().hasLocalizedName()) {
             if(heldItems.getRightHandItem().getItemMeta().getLocalizedName().equals(ItemData.CRAFTING_TABLE_STICK.getLocName())) {
                 player.openWorkbench(player.getLocation(), true);
+            } else if(ItemBackPack.isBackpack(heldItems.getRightHandItem())) {
+                if(!ItemBackPack.hasId(heldItems.getRightHandItem())) {
+                    ItemBackPack.assignID(heldItems.getRightHandItem());
+                }
+                ItemBackPack.displayToPlayer(player, ItemBackPack.getBackpackId(heldItems.getRightHandItem()));
             }
         }
-
-
-
     }
 
     /**
@@ -67,6 +70,11 @@ public class PlayerInteractionEvent implements Listener{
         if(rightHandItem.hasItemMeta() && rightHandItem.getItemMeta().hasLocalizedName()) {
             if(rightHandItem.getItemMeta().getLocalizedName().equals(ItemData.CRAFTING_TABLE_STICK.getLocName())) {
                 player.openWorkbench(player.getLocation(), true);
+            } else if(ItemBackPack.isBackpack(rightHandItem)) {
+                if(!ItemBackPack.hasId(rightHandItem)) {
+                    ItemBackPack.assignID(rightHandItem);
+                }
+                ItemBackPack.displayToPlayer(player, ItemBackPack.getBackpackId(rightHandItem));
             }
         }
     }

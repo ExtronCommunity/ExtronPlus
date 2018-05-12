@@ -475,7 +475,7 @@ public enum ParticleEffect {
     private final boolean requiresData;
     private final boolean requiresWater;
 
-    // Initialize map for quick name and id lookup
+    // Initialize map for quick name and idCount lookup
     static {
         for (ParticleEffect effect : values()) {
             NAME_MAP.put(effect.name, effect);
@@ -543,9 +543,9 @@ public enum ParticleEffect {
     }
 
     /**
-     * Returns the id of this particle effect
+     * Returns the idCount of this particle effect
      *
-     * @return The id
+     * @return The idCount
      */
     public int getId() {
         return id;
@@ -609,7 +609,7 @@ public enum ParticleEffect {
     }
 
     /**
-     * Returns the particle effect with the given id
+     * Returns the particle effect with the given idCount
      *
      * @param id Id of the particle effect
      * @return The particle effect
@@ -996,8 +996,8 @@ public enum ParticleEffect {
 
         /**
          * Sets the packet data. Should be an integer array. For ITEM_CRACK and
-         * BLOCK_DUST, it should be [id, meta] but for BLOCK_CRACK it should be
-         * [id + (meta * 4096)]
+         * BLOCK_DUST, it should be [idCount, meta] but for BLOCK_CRACK it should be
+         * [idCount + (meta * 4096)]
          *
          * @param data The packet data.
          */
