@@ -1,6 +1,7 @@
 package com.supercity.main.sleep;
 
 import com.supercity.main.SuperCity;
+import com.supercity.main.recording.RecordingManager;
 import com.supercity.main.utils.Reference;
 import com.supercity.main.utils.WorldUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -58,7 +59,9 @@ public class OnePlayerSleepHandler implements Listener {
                 cancelSleep.setText(Reference.CANCEL_SLEEP_4_PEOPLE[random.nextInt(Reference.CANCEL_SLEEP_4_PEOPLE.length)]);
             }
             for (Player p : Bukkit.getOnlinePlayers()) {
-                p.spigot().sendMessage(playerSleeping, cancelSleep);
+                if (RecordingManager.getSettings(p).sendSleepAlerts()) {
+                    p.spigot().sendMessage(playerSleeping, cancelSleep);
+                }
             }
         }
         inBed.add(e.getPlayer());
@@ -66,7 +69,11 @@ public class OnePlayerSleepHandler implements Listener {
 
     @EventHandler
     public void onPlayerLeaveBed(PlayerBedLeaveEvent e) {
-        Bukkit.broadcastMessage(ChatColor.GREEN + e.getPlayer().getDisplayName() + " left the bed");
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (RecordingManager.getSettings(p).sendSleepAlerts()) {
+                p.sendMessage(ChatColor.GREEN + e.getPlayer().getDisplayName() + " left the bed");
+            }
+        }
         inBed.remove(e.getPlayer());
     }
 

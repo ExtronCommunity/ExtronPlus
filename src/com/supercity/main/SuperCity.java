@@ -1,17 +1,11 @@
 package com.supercity.main;
 
-import com.supercity.main.commands.CommandDontSkipNight;
-import com.supercity.main.commands.CommandGetCustomItem;
-import com.supercity.main.commands.CommandReEnableOnePlayerSleep;
+import com.supercity.main.commands.*;
 import com.supercity.main.crafting.RecipeCraftingStick;
 import com.supercity.main.crafting.RecipeJetpack;
 import com.supercity.main.enchants.CurseOfBreaking;
 import com.supercity.main.enchants.HeatWalker;
-import com.supercity.main.event.ItemEnchantEvent;
-import com.supercity.main.event.PlayerDieEvent;
-import com.supercity.main.event.PlayerInteractionEvent;
-import com.supercity.main.event.PlayerJoinGameEvent;
-import com.supercity.main.event.PlayerToggleShiftEvent;
+import com.supercity.main.event.*;
 import com.supercity.main.event.custom.CustomEventListener;
 import com.supercity.main.jetpack.JetpackHandler;
 import com.supercity.main.sleep.OnePlayerSleepHandler;
@@ -63,6 +57,7 @@ public class SuperCity extends JavaPlugin implements Listener {
         pm.registerEvents(new ItemEnchantEvent(), this);
         pm.registerEvents(new CustomEventListener(), this);
         pm.registerEvents(new SpawnerMovingHandler(), this);
+        pm.registerEvents(new ChatMessageEvent(),this);
         pm.registerEvents(this,this);
         pm.registerEvents(onePlayerSleepHandler, this);
     }
@@ -71,6 +66,9 @@ public class SuperCity extends JavaPlugin implements Listener {
         getCommand("getCustomItem").setExecutor(new CommandGetCustomItem());
         getCommand("dontSkipNight").setExecutor(new CommandDontSkipNight());
         getCommand("enableOnePlayerSleep").setExecutor(new CommandReEnableOnePlayerSleep());
+        getCommand("recording").setExecutor(new CommandRecording());
+        getCommand("togglescoreboard").setExecutor(new CommandToggleSB());
+        getCommand("togglechat").setExecutor(new CommandToggleChat());
     }
 
     private void registerHandlers() {
