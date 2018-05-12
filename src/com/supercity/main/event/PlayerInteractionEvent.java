@@ -3,14 +3,25 @@ package com.supercity.main.event;
 import com.supercity.main.backpack.ItemBackPack;
 import com.supercity.main.inventory.HandItems;
 import com.supercity.main.utils.Reference.ItemData;
+import net.minecraft.server.v1_12_R1.BlockPosition;
+import net.minecraft.server.v1_12_R1.BlockRedstoneWire;
+import net.minecraft.server.v1_12_R1.Blocks;
+import net.minecraft.server.v1_12_R1.WorldServer;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Redstone;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class PlayerInteractionEvent implements Listener{
 
@@ -76,6 +87,40 @@ public class PlayerInteractionEvent implements Listener{
                 }
                 ItemBackPack.displayToPlayer(player, ItemBackPack.getBackpackId(rightHandItem));
             }
+        }
+        if (block.getType() == Material.SIGN || block.getType() == Material.SIGN_POST) {
+            if (player.isSneaking()) {
+                if (rightHandItem.getType() == Material.TRIPWIRE_HOOK) {
+                    if (!trappedSigns.contains(block.getLocation())) {
+                        rightHandItem.setAmount(rightHandItem.getAmount() - 1);
+                        if (rightHandItem.getAmount() > 0) {
+                            player.getInventory().setItemInMainHand(rightHandItem);
+                        } else {
+                            player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
+                        }
+                    }
+                }
+            } else {
+                CraftWorld cw = (CraftWorld)block.getWorld();
+                WorldServer ws = cw.getHandle();
+
+                activate(block,BlockFace.EAST);
+                activate(block,BlockFace.WEST);
+                activate(block,BlockFace.SOUTH);
+                activate(block,BlockFace.NORTH);
+                activate(block,BlockFace.DOWN);
+                activate(block,BlockFace.UP);
+            }
+        }
+    }
+
+    private Set<Location> trappedSigns = new HashSet<>();
+
+    private void activate(Block b, BlockFace face) {
+        Block p = b.getRelative(face);
+        if (p.getType() == Material.REDSTONE_WIRE) {
+            BlockRedstoneWire wire = Blocks.REDSTONE_WIRE;
+            ((CraftWorld)b.getWorld()).getHandle().setTypeAndData(new BlockPosition(p.getLocation().getBlockX(),p.getLocation().getBlockY(),p.getLocation().getBlockZ()),wire.getBlockData().set(BlockRedstoneWire.POWER,15),3);
         }
     }
 
