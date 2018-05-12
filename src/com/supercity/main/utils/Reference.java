@@ -1,6 +1,7 @@
 package com.supercity.main.utils;
 
 import com.supercity.main.backpack.ItemBackPack;
+import com.supercity.main.config.ConfigManager;
 import com.supercity.main.item.CraftingTableStick;
 import com.supercity.main.item.CustomItem;
 import com.supercity.main.item.HeatWalkerBoots;
@@ -33,7 +34,7 @@ public class Reference {
 
     public static final int ONE_PLAYER_SLEEP_COOLDOWN = 80;
 
-    public static final int ROWS_IN_BACKPACK = 1;
+    public static final int ROWS_IN_BACKPACK = ConfigManager.backpackConfig.get().getInt("rows", 2);
 
     public enum ItemData {
         JETPACK(Material.ELYTRA, "§6Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),

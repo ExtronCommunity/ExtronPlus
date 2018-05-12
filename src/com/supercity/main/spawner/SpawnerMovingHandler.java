@@ -53,7 +53,7 @@ public class SpawnerMovingHandler implements Listener {
 
     private void spawnSpawnerMinecart(Location l, String mobId) {
         String customTag = "SpanwerMinecart_" + mobId + "_" + UUID.randomUUID().toString();
-        String cmd = "execute %playerName ~ ~ ~ summon minecraft:spawner_minecart %x %y %z {SpawnData:{id:\"%mobId\"},CustomName:\"%MobId Spawner\",CustomNameVisible:1,Tags:[\"%tag\"]}".replaceAll("%x", Integer.toString(l.getBlockX()))
+        String cmd = "execute %playerName ~ ~ ~ summon minecraft:spawner_minecart %x %y %z {SpawnData:{idCount:\"%mobId\"},CustomName:\"%MobId Spawner\",CustomNameVisible:1,Tags:[\"%tag\"]}".replaceAll("%x", Integer.toString(l.getBlockX()))
                 .replaceAll("%y", Integer.toString(l.getBlockY())).replaceAll("%z", Integer.toString(l.getBlockZ())).replaceAll("%mobId", mobId).replaceAll("%MobId", mobId.substring(0, 1).toUpperCase() + mobId.substring(1).toLowerCase())
                 .replaceAll("%playerName", l.getWorld().getPlayers().get(0).getName()).replaceAll("%tag", customTag);
         System.out.println(cmd);
@@ -78,7 +78,7 @@ public class SpawnerMovingHandler implements Listener {
                     minecarts.remove(e);
                     e.getWorld().spawn(e.getLocation(), Minecart.class);
                     e.remove();
-                    String cmd = "execute %playerName ~ ~ ~ setblock %x %y %z mob_spawner 0 replace {SpawnData:{id:\"%mobId\"}}".replaceAll("%mobId", mobId).replaceAll("%playerName", in.getWorld().getPlayers().get(0).getName())
+                    String cmd = "execute %playerName ~ ~ ~ setblock %x %y %z mob_spawner 0 replace {SpawnData:{idCount:\"%mobId\"}}".replaceAll("%mobId", mobId).replaceAll("%playerName", in.getWorld().getPlayers().get(0).getName())
                             .replaceAll("%x", Integer.toString(in.getLocation().getBlockX())).replaceAll("%y", Integer.toString(in.getLocation().getBlockY()+1)).replaceAll("%z", Integer.toString(in.getLocation().getBlockZ()));
                     Bukkit.dispatchCommand(console, cmd);
                 }

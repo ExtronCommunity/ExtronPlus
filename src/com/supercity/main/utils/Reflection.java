@@ -1,5 +1,7 @@
 package com.supercity.main.utils;
 
+import org.bukkit.Bukkit;
+
 import java.lang.reflect.Field;
 
 public class Reflection {
@@ -29,4 +31,25 @@ public class Reflection {
             System.out.println("Can't set field value of " + name + " on class " + clazz.getSimpleName());
         }
     }
+
+    public static Class<?> getNMSClass(String clazz) {
+        String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+        try {
+            return Class.forName("net.minecraft.server." + version + "." + clazz);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Class<?> getCraftBukkitClass(String clazz) {
+        String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+        try {
+            return Class.forName("org.bukkit.craftbukkit." + version + "." + clazz);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
