@@ -91,6 +91,28 @@ public class RecordingManager {
             s = Bukkit.getScoreboardManager().getNewScoreboard();
             Objective health = s.registerNewObjective("health","health");
             health.setDisplaySlot(DisplaySlot.PLAYER_LIST);
+            copyHealthFromMain(health);
+            Team r = s.registerNewTeam("recording");
+            Team t = s.registerNewTeam("team");
+            Team a = s.registerNewTeam("afk");
+            for (Player pl : Bukkit.getOnlinePlayers()) {
+                r.setPrefix("§c[REC] ");
+                r.setOption(Team.Option.NAME_TAG_VISIBILITY,Team.OptionStatus.NEVER);
+                if (!getSettings(pl).isAFK() && getSettings(pl).isRecording()) r.addEntry(pl.getName());
+
+                t.setColor(ChatColor.DARK_PURPLE);
+                t.setPrefix(ChatColor.DARK_PURPLE +"");
+                t.setSuffix(ChatColor.RESET +"");
+                t.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
+                if (!getSettings(pl).isAFK() && !getSettings(p).isRecording()) t.addEntry(pl.getName());
+
+                a.setColor(ChatColor.GRAY);
+                a.setPrefix(ChatColor.GRAY + "");
+                a.setSuffix(ChatColor.RESET + "");
+                a.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
+
+                if (getSettings(pl).isAFK()) a.addEntry(pl.getName());
+            }
         } else {
             s = Bukkit.getScoreboardManager().getMainScoreboard();
         }
@@ -114,6 +136,16 @@ public class RecordingManager {
             t.addEntry(p.getName());
         }
         p.setScoreboard(s);
+    }
+
+    private static void copyHealthFromMain(Objective health) {
+        Scoreboard main = Bukkit.getScoreboardManager().getMainScoreboard();
+        Objective h = main.getObjective("health");
+        if (h == null) return;
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            Score s = h.getScore(p.getName());
+            health.getScore(p.getName()).setScore(s.getScore());
+        }
     }
 
     public static void toggleChat(Player p) {
