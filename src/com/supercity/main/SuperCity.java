@@ -8,6 +8,7 @@ import com.supercity.main.enchants.HeatWalker;
 import com.supercity.main.event.*;
 import com.supercity.main.event.custom.CustomEventListener;
 import com.supercity.main.jetpack.JetpackHandler;
+import com.supercity.main.recording.RecordingManager;
 import com.supercity.main.sleep.OnePlayerSleepHandler;
 import com.supercity.main.spawner.SpawnerMovingHandler;
 import com.supercity.main.utils.Reflection;
@@ -46,6 +47,7 @@ public class SuperCity extends JavaPlugin implements Listener {
 
     public void onDisable() {
         unregisterEnchants();
+        RecordingManager.setAllNotAFK();
     }
 
     private void registerEvents() {
@@ -58,8 +60,11 @@ public class SuperCity extends JavaPlugin implements Listener {
         pm.registerEvents(new CustomEventListener(), this);
         pm.registerEvents(new SpawnerMovingHandler(), this);
         pm.registerEvents(new ChatMessageEvent(),this);
+        pm.registerEvents(new PlayerMovedEvent(),this);
         pm.registerEvents(this,this);
         pm.registerEvents(onePlayerSleepHandler, this);
+
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(SuperCity.INSTANCE, RecordingManager::tick, 0, 1);
     }
 
     private void registerCommands() {
@@ -111,12 +116,8 @@ public class SuperCity extends JavaPlugin implements Listener {
             HashMap<Integer, Enchantment> byId = (HashMap<Integer, Enchantment>) Reflection.getField(null, Enchantment.class, "byId");
             HashMap<String, Enchantment> byName = (HashMap<String, Enchantment>) Reflection.getField(null, Enchantment.class, "byName");
             for (Enchantment e : customEnchants) {
-                if (byId.containsKey(e.getId())) {
-                    byId.remove(e.getId());
-                }
-                if (byName.containsKey(e.getName())) {
-                    byName.remove(e.getName());
-                }
+                byId.remove(e.getId());
+                byName.remove(e.getName());
             }
         } catch (ClassCastException e) {
             System.out.println(e.getMessage());

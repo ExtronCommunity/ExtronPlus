@@ -37,7 +37,7 @@ public class Reference {
     public static final String CHAT_HIDDEN = "Chat is now hidden. F3 + D to clear current chat!";
 
     public static final int ONE_PLAYER_SLEEP_COOLDOWN = 80;
-
+    public static final int AFK_TIMER_LIMIT = 1200;
 
 
     public enum ItemData {

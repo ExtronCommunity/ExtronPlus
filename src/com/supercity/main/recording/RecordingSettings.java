@@ -1,5 +1,7 @@
 package com.supercity.main.recording;
 
+import com.supercity.main.utils.Reference;
+
 public class RecordingSettings {
 
     private boolean recording;
@@ -7,6 +9,8 @@ public class RecordingSettings {
     private boolean showChat;
     private boolean sendSleepAlerts;
     private boolean sendRecordAlerts;
+    public int afkTimer;
+    private boolean afk;
 
     public RecordingSettings() {
         recording = false;
@@ -14,6 +18,8 @@ public class RecordingSettings {
         showChat = true;
         sendSleepAlerts = true;
         sendRecordAlerts = true;
+        afkTimer = 0;
+        afk = false;
     }
 
     public void setRecording(boolean b) {
@@ -54,5 +60,13 @@ public class RecordingSettings {
 
     public void setSendRecordAlerts(boolean sendRecordAlerts) {
         this.sendRecordAlerts = sendRecordAlerts;
+    }
+
+    public void setAFK(boolean afk) {
+        this.afk = afk;
+    }
+
+    public boolean isAFK() {
+        return afk;
     }
 }
