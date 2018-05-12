@@ -18,8 +18,6 @@ public class CropRightClickManager {
 //        Crops c = (Crops) block;
 //        return c.getState() == CropState.RIPE;
         if(block.getState().getData() instanceof Crops) {
-            System.out.println(((Crops)block.getState().getData()).getState());
-            ((Crops)block.getState().getData()).setState(CropState.RIPE);
             return ((Crops)block.getState().getData()).getState() == CropState.RIPE;
         }
         return false;

@@ -80,7 +80,6 @@ public class PlayerInteractionEvent implements Listener{
             }
         } else if(Reference.CROPS.contains(block.getType())) {
             if (CropRightClickManager.isMature(block)) {
-                System.out.println("RIPE!");
                 CropRightClickManager.handleCropClick(block);
             }
         }
