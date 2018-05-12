@@ -73,12 +73,14 @@ public class Boing extends Enchantment implements Listener {
                 int level = p.getInventory().getItemInMainHand().getEnchantmentLevel(this);
                 if (level > 0) {
                     long time = System.currentTimeMillis();
-                    long time2 = delay.get(p.getUniqueId());
-                    if (time - time2 < 700) {
-                        count.put(p.getUniqueId(),count.get(p.getUniqueId()) + 1);
-                        if (count.get(p.getUniqueId()) > new Random().nextInt(5)+3) {
-                            e.getEntity().setVelocity(new Vector(0,0.3*level,0));
-                            count.put(p.getUniqueId(),0);
+                    Long time2 = delay.get(p.getUniqueId());
+                    if (time2 != null) {
+                        if (time - time2 < 700) {
+                            count.put(p.getUniqueId(), count.get(p.getUniqueId()) + 1);
+                            if (count.get(p.getUniqueId()) > new Random().nextInt(5) + 3) {
+                                e.getEntity().setVelocity(new Vector(0, 0.3 * level, 0));
+                                count.put(p.getUniqueId(), 0);
+                            }
                         }
                     } else {
                         count.put(p.getUniqueId(),0);

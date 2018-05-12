@@ -77,6 +77,7 @@ public class SuperCity extends JavaPlugin implements Listener {
         pm.registerEvents(new ItemEnchantEvent(), this);
         pm.registerEvents(new CustomEventListener(), this);
         pm.registerEvents(new SpawnerMovingHandler(), this);
+        pm.registerEvents(new MobSpawnEvent(),this);
         //pm.registerEvents(new ChatMessageEvent(),this);
         //pm.registerEvents(new PlayerMovedEvent(),this);
         pm.registerEvents(this,this);

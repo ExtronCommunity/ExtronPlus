@@ -2,10 +2,7 @@ package com.supercity.main.utils;
 
 import com.supercity.main.backpack.ItemBackPack;
 import com.supercity.main.config.ConfigManager;
-import com.supercity.main.item.CraftingTableStick;
-import com.supercity.main.item.CustomItem;
-import com.supercity.main.item.HeatWalkerBoots;
-import com.supercity.main.item.PickaxeCurseOfBreaking;
+import com.supercity.main.item.*;
 import com.supercity.main.jetpack.ItemJetpack;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -49,7 +46,8 @@ public class Reference {
         PICK(Material.DIAMOND_PICKAXE, "DiamondPickaxe", "BreakingPickaxe", false, PickaxeCurseOfBreaking.class, "§cCurse of Breaking"),
         CRAFTING_TABLE_STICK(Material.STICK, "§6Crafting Table on a stick", "craftingTableStick", false, CraftingTableStick.class),
         BACKPACK(Material.LEATHER, "§6Backpack", "backpack", false, ItemBackPack.class),
-        HEATWALK_BOOTS(Material.DIAMOND_BOOTS,"§cHeatWalker Boots","heatwalkerboots",true, HeatWalkerBoots.class,"§7Heat Walker II");
+        HEATWALK_BOOTS(Material.DIAMOND_BOOTS,"§cHeatWalker Boots","heatwalkerboots",true, HeatWalkerBoots.class,"§7Heat Walker II"),
+        LIFESTEAL_SWORD(Material.DIAMOND_SWORD,"Diamond Sword","lifestealSword",true, LifestealSword.class,"§7Lifesteal");
 
         private String displayName, locName;
         private boolean hasEnchantedGlint;

@@ -60,7 +60,7 @@ public class Lifesteal extends Enchantment implements Listener {
             Player p = (Player) e.getDamager();
             ItemStack sword = p.getInventory().getItemInMainHand();
             if (sword.containsEnchantment(this)) {
-                if (p.getMaxHealth() > p.getHealth()) {
+                if (p.getHealth() <= 19.0) {
                     p.setHealth(p.getHealth() + 1);
                 }
             }
