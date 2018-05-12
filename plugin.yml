@@ -12,3 +12,15 @@ commands:
   enableOnePlayerSleep:
     description: "Re enables on-player-sleep!"
     usage: "/enableoneplayersleep"
+  recording:
+    description: "Toggles recording mode for youtubers!"
+    usage: "/recording"
+    aliases: ["rec"]
+  togglescoreboard:
+    description: "Toggles the sidebar scoreboard!"
+    usage: "/togglescoreboard"
+    aliases: ["togglesb"]
+  togglechat:
+    description: "Toggles the visibility of chat messages from other players!"
+    usage: "/togglechat"
+    aliases: ["togglechat","silent"]

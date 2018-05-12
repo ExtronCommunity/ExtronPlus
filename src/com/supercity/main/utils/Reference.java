@@ -21,7 +21,7 @@ public class Reference {
     public static final String INVALID_ITEM_LOC_NAME = ChatColor.DARK_RED + "%name is not a valid name!";
     public static final String SUCCESSFULLY_ADDED_ITEM  = ChatColor.GREEN + "Item %name was added to your inventory!";
     public static final String JETPACK_NO_FUEL_IN_INVENTORY = ChatColor.RED + "You do not have any fuel in your inventory!";
-    public static final String PLAYER_ENTERED_BED = "§a%player is sleeping.";
+    public static final String PLAYER_ENTERED_BED = "§a%player is now sleeping.";
     public static final String ANOTHER_PLAYER_ENTERED_BED = "§a%player is also sleeping";
     public static final String PLAYER_3_ENTERED_BED = "§a%player saw %player1 and %player2 are §asleeping, §aand wanted to join the party";
     public static final String CANCEL_SLEEP = "§4[NO]";
@@ -31,8 +31,16 @@ public class Reference {
     public static final String[] CANCEL_SLEEP_4_PEOPLE = {"§4[...]","§4[WHY EVEN, SOMEONE ELSE IS ALREADY SLEEPING]","§4[BUT I WANT DA NITE PLZ]","§4[IM HUNTING MONSTERS.. DO NOT DISTURB]"};
     public static final String CANCEL_SLEEP_HOVER_MESSAGE = "Click me to cancel one player sleep for this night";
     public static final String DEATH_MESSAGE_JETPACK = "%name enjoyed jetpacks too much";
+    public static final String PLAYER_STARTED_RECORDING = "%player §cis now recording.";
+    public static final String PLAYER_STOPPED_RECORDING = "%player §ais no longer recording.";
+    public static final String MYSELF_STARTED_RECORDING = "You have started recording!";
+    public static final String MYSELF_STOPPED_RECORDING = "You have stopped recording!";
+    public static final String CHAT_SHOWN = "The chat is now visible!";
+    public static final String CHAT_HIDDEN = "Chat is now hidden. F3 + D to clear current chat!";
 
     public static final int ONE_PLAYER_SLEEP_COOLDOWN = 80;
+    public static final int AFK_TIMER_LIMIT = 1200;
+
 
     public static final int ROWS_IN_BACKPACK = ConfigManager.backpackConfig.get().getInt("rows", 2);
 
