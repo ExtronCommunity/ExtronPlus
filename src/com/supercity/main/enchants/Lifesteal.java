@@ -1,28 +1,22 @@
 package com.supercity.main.enchants;
 
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerItemDamageEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class CurseOfBreaking extends Enchantment implements Listener {
-
-    @EventHandler
-    public void onPlayerLoseDurability(PlayerItemDamageEvent e) {
-        if(e.getItem().getItemMeta().hasEnchant(this)) {
-            e.setDamage(e.getDamage() * 2);
-        }
-    }
-
-    public CurseOfBreaking() {
-        super(102);
+public class Lifesteal extends Enchantment implements Listener {
+    public Lifesteal() {
+        super(103);
     }
 
     @Override
     public String getName() {
-        return "§cCurse of Breaking";
+        return "Lifesteal";
     }
 
     @Override
@@ -37,7 +31,7 @@ public class CurseOfBreaking extends Enchantment implements Listener {
 
     @Override
     public EnchantmentTarget getItemTarget() {
-        return EnchantmentTarget.ALL;
+        return EnchantmentTarget.WEAPON;
     }
 
     @Override
@@ -47,7 +41,7 @@ public class CurseOfBreaking extends Enchantment implements Listener {
 
     @Override
     public boolean isCursed() {
-        return true;
+        return false;
     }
 
     @Override
@@ -58,5 +52,18 @@ public class CurseOfBreaking extends Enchantment implements Listener {
     @Override
     public boolean canEnchantItem(ItemStack itemStack) {
         return true;
+    }
+
+    @EventHandler
+    public void onAttack(EntityDamageByEntityEvent e) {
+        if (e.getDamager() instanceof Player) {
+            Player p = (Player) e.getDamager();
+            ItemStack sword = p.getInventory().getItemInMainHand();
+            if (sword.containsEnchantment(this)) {
+                if (p.getMaxHealth() > p.getHealth()) {
+                    p.setHealth(p.getHealth() + 1);
+                }
+            }
+        }
     }
 }

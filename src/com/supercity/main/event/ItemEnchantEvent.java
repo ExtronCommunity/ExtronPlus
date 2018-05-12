@@ -25,39 +25,38 @@ public class ItemEnchantEvent implements Listener {
     @EventHandler
     public void enchant(EnchantItemEvent e) {
         Random r = new Random();
-        List<Enchantment> validEnchs = new ArrayList();
-        Iterator var4 = SuperCity.INSTANCE.customEnchants.iterator();
+        List<Enchantment> validEnchs = new ArrayList<>();
 
-        while(var4.hasNext()) {
-            Enchantment en = (Enchantment)var4.next();
+        for (Enchantment en : SuperCity.INSTANCE.customEnchants) {
             if (en.getItemTarget().includes(e.getItem())) {
                 validEnchs.add(en);
             }
         }
 
-        if (r.nextInt(e.getEnchantsToAdd().size() * 2) == 0) {
+        if (r.nextInt(e.getEnchantsToAdd().size() + 1) == 0) {
+            System.out.println("adding enchant");
             Enchantment ench = null;
             if (validEnchs.size() > 1) {
-                ench = (Enchantment)validEnchs.get(r.nextInt(validEnchs.size()));
+                ench = validEnchs.get(r.nextInt(validEnchs.size()));
             } else if (validEnchs.size() == 1 && r.nextInt(5) == 0) {
-                ench = (Enchantment)validEnchs.get(0);
+                ench = validEnchs.get(0);
             }
 
             if (ench != null) {
+                System.out.println("the enchant is " + ench.getName());
                 int level = this.getPreferredLevel(ench, e.getEnchantsToAdd().size(), e.getExpLevelCost(), r);
                 e.getEnchantsToAdd().put(ench, level);
                 ItemMeta m = e.getItem().getItemMeta();
                 List<String> lore = m.getLore();
                 if (lore == null) {
-                    lore = new ArrayList();
+                    lore = new ArrayList<>();
                 }
 
-                ((List)lore).add(ChatColor.GRAY + ench.getName() + " " + getLevelSign(level, ench.getMaxLevel()));
-                m.setLore((List)lore);
+                lore.add(ChatColor.GRAY + ench.getName() + " " + getLevelSign(level, ench.getMaxLevel()));
+                m.setLore(lore);
                 e.getItem().setItemMeta(m);
             }
         }
-
     }
 
     public static String getLevelSign(int level, int maxLevel) {

@@ -9,8 +9,10 @@ import com.supercity.main.config.ConfigManager;
 import com.supercity.main.crafting.RecipeBackpack;
 import com.supercity.main.crafting.RecipeCraftingStick;
 import com.supercity.main.crafting.RecipeJetpack;
+import com.supercity.main.enchants.Boing;
 import com.supercity.main.enchants.CurseOfBreaking;
 import com.supercity.main.enchants.HeatWalker;
+import com.supercity.main.enchants.Lifesteal;
 import com.supercity.main.event.*;
 import com.supercity.main.event.ItemEnchantEvent;
 import com.supercity.main.event.PlayerCloseInventoryEvent;
@@ -116,6 +118,8 @@ public class SuperCity extends JavaPlugin implements Listener {
     private void registerEnchants() {
         customEnchants.add(new CurseOfBreaking());
         customEnchants.add(new HeatWalker());
+        customEnchants.add(new Boing());
+        customEnchants.add(new Lifesteal());
         try {
             Reflection.setField(null,Enchantment.class,"acceptingNew",true);
             for (Enchantment e : customEnchants) {
