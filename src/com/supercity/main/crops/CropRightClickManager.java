@@ -11,6 +11,7 @@ public class CropRightClickManager {
         Material old = block.getType();
         block.breakNaturally();
         block.setType(old);
+        //block.getState().
     }
 
     public static boolean isMature(Block block) {
