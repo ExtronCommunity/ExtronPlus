@@ -101,20 +101,19 @@ public class PlayerInteractionEvent implements Listener{
                     }
                 }
             } else {
-                CraftWorld cw = (CraftWorld)block.getWorld();
-                WorldServer ws = cw.getHandle();
-
-                activate(block,BlockFace.EAST);
-                activate(block,BlockFace.WEST);
-                activate(block,BlockFace.SOUTH);
-                activate(block,BlockFace.NORTH);
-                activate(block,BlockFace.DOWN);
-                activate(block,BlockFace.UP);
+                if (trappedSigns.contains(block.getLocation())) {
+                    activate(block, BlockFace.EAST);
+                    activate(block, BlockFace.WEST);
+                    activate(block, BlockFace.SOUTH);
+                    activate(block, BlockFace.NORTH);
+                    activate(block, BlockFace.DOWN);
+                    activate(block, BlockFace.UP);
+                }
             }
         }
     }
 
-    private Set<Location> trappedSigns = new HashSet<>();
+    public static Set<Location> trappedSigns = new HashSet<>();
 
     private void activate(Block b, BlockFace face) {
         Block p = b.getRelative(face);
