@@ -63,7 +63,7 @@ public class SuperCity extends JavaPlugin implements Listener {
 
     public void onDisable() {
         unregisterEnchants();
-        RecordingManager.setAllNotAFK();
+        //RecordingManager.setAllNotAFK();
     }
 
     private void registerEvents() {
@@ -75,11 +75,11 @@ public class SuperCity extends JavaPlugin implements Listener {
         pm.registerEvents(new ItemEnchantEvent(), this);
         pm.registerEvents(new CustomEventListener(), this);
         pm.registerEvents(new SpawnerMovingHandler(), this);
-        pm.registerEvents(new ChatMessageEvent(),this);
-        pm.registerEvents(new PlayerMovedEvent(),this);
+        //pm.registerEvents(new ChatMessageEvent(),this);
+        //pm.registerEvents(new PlayerMovedEvent(),this);
         pm.registerEvents(this,this);
         pm.registerEvents(onePlayerSleepHandler, this);
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(SuperCity.INSTANCE, RecordingManager::tick, 0, 1);
+        //Bukkit.getScheduler().scheduleSyncRepeatingTask(SuperCity.INSTANCE, RecordingManager::tick, 0, 1);
         pm.registerEvents(new PlayerCloseInventoryEvent(), this);
         pm.registerEvents(new PlayerCraftItemEvent(), this);
     }
@@ -88,9 +88,9 @@ public class SuperCity extends JavaPlugin implements Listener {
         getCommand("getCustomItem").setExecutor(new CommandGetCustomItem());
         getCommand("dontSkipNight").setExecutor(new CommandDontSkipNight());
         getCommand("enableOnePlayerSleep").setExecutor(new CommandReEnableOnePlayerSleep());
-        getCommand("recording").setExecutor(new CommandRecording());
-        getCommand("togglescoreboard").setExecutor(new CommandToggleSB());
-        getCommand("togglechat").setExecutor(new CommandToggleChat());
+        //getCommand("recording").setExecutor(new CommandRecording());
+        //getCommand("togglescoreboard").setExecutor(new CommandToggleSB());
+        //getCommand("togglechat").setExecutor(new CommandToggleChat());
     }
 
     private void registerHandlers() {

@@ -257,4 +257,21 @@ public class RecordingManager {
             setAFK(p,false);
         }
     }
+
+    public static void playerJoin(Player p) {
+        for (Player pl : Bukkit.getOnlinePlayers()) {
+            if (!getSettings(pl).showScoreboard()) {
+                Team rec = pl.getScoreboard().getTeam("recording");
+                if (rec != null) {
+                    if (getSettings(pl).isRecording()) rec.addEntry(p.getName());
+                }
+                Team t = pl.getScoreboard().getTeam("team");
+                if (t != null) {
+                    if (!getSettings(pl).isRecording() && !getSettings(p).isAFK()) {
+
+                    }
+                }
+            }
+        }
+    }
 }

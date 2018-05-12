@@ -9,6 +9,6 @@ public class PlayerLeaveServer implements Listener {
 
     @EventHandler
     public void leave(PlayerQuitEvent e) {
-        RecordingManager.setAFK(e.getPlayer(),false);
+        //RecordingManager.setAFK(e.getPlayer(),false);
     }
 }
