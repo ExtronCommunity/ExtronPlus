@@ -56,6 +56,12 @@ public class RecordingManager {
                 rec.setOption(Team.Option.NAME_TAG_VISIBILITY,Team.OptionStatus.NEVER);
             }
             rec.addEntry(p.getName());
+            for (Player pl : Bukkit.getOnlinePlayers()) {
+                if (!getSettings(pl).showScoreboard()) {
+                    Team r = pl.getScoreboard().getTeam("recording");
+                    if (r != null) r.addEntry(p.getName());
+                }
+            }
         } else {
             Team t = s.getTeam("team");
             if (t == null) {
@@ -66,6 +72,12 @@ public class RecordingManager {
                 t.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
             }
             t.addEntry(p.getName());
+            for (Player pl : Bukkit.getOnlinePlayers()) {
+                if (!getSettings(pl).showScoreboard()) {
+                    Team r = pl.getScoreboard().getTeam("team");
+                    if (r != null) r.addEntry(p.getName());
+                }
+            }
         }
         p.setScoreboard(s);
     }
@@ -124,6 +136,12 @@ public class RecordingManager {
                 rec.setOption(Team.Option.NAME_TAG_VISIBILITY,Team.OptionStatus.NEVER);
             }
             rec.addEntry(p.getName());
+            for (Player pl : Bukkit.getOnlinePlayers()) {
+                if (!getSettings(pl).showScoreboard()) {
+                    Team r = pl.getScoreboard().getTeam("recording");
+                    if (r != null) r.addEntry(p.getName());
+                }
+            }
         } else {
             Team t = s.getTeam("team");
             if (t == null) {
@@ -134,6 +152,12 @@ public class RecordingManager {
                 t.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
             }
             t.addEntry(p.getName());
+            for (Player pl : Bukkit.getOnlinePlayers()) {
+                if (!getSettings(pl).showScoreboard()) {
+                    Team r = pl.getScoreboard().getTeam("team");
+                    if (r != null) r.addEntry(p.getName());
+                }
+            }
         }
         p.setScoreboard(s);
     }
@@ -187,6 +211,12 @@ public class RecordingManager {
                 afk.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
             }
             afk.addEntry(p.getName());
+            for (Player pl : Bukkit.getOnlinePlayers()) {
+                if (!getSettings(pl).showScoreboard()) {
+                    Team r = pl.getScoreboard().getTeam("afk");
+                    if (r != null) r.addEntry(p.getName());
+                }
+            }
         } else {
             if (getSettings(p).isRecording()) {
                 Team rec = s.getTeam("recording");
@@ -196,6 +226,12 @@ public class RecordingManager {
                     rec.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
                 }
                 rec.addEntry(p.getName());
+                for (Player pl : Bukkit.getOnlinePlayers()) {
+                    if (!getSettings(pl).showScoreboard()) {
+                        Team r = pl.getScoreboard().getTeam("recording");
+                        if (r != null) r.addEntry(p.getName());
+                    }
+                }
             } else {
                 Team t = s.getTeam("team");
                 if (t == null) {
@@ -206,6 +242,12 @@ public class RecordingManager {
                     t.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
                 }
                 t.addEntry(p.getName());
+                for (Player pl : Bukkit.getOnlinePlayers()) {
+                    if (!getSettings(pl).showScoreboard()) {
+                        Team r = pl.getScoreboard().getTeam("team");
+                        if (r != null) r.addEntry(p.getName());
+                    }
+                }
             }
         }
     }
@@ -213,6 +255,23 @@ public class RecordingManager {
     public static void setAllNotAFK() {
         for (Player p : Bukkit.getOnlinePlayers()) {
             setAFK(p,false);
+        }
+    }
+
+    public static void playerJoin(Player p) {
+        for (Player pl : Bukkit.getOnlinePlayers()) {
+            if (!getSettings(pl).showScoreboard()) {
+                Team rec = pl.getScoreboard().getTeam("recording");
+                if (rec != null) {
+                    if (getSettings(pl).isRecording()) rec.addEntry(p.getName());
+                }
+                Team t = pl.getScoreboard().getTeam("team");
+                if (t != null) {
+                    if (!getSettings(pl).isRecording() && !getSettings(p).isAFK()) {
+
+                    }
+                }
+            }
         }
     }
 }
