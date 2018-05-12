@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 public abstract class CustomBlock {
 
     /**
-     * The id of the block. used for registry and differentiation.
+     * The idCount of the block. used for registry and differentiation.
      */
     public abstract String getId();
 
