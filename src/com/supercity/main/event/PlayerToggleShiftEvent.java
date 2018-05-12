@@ -5,6 +5,7 @@ import com.supercity.main.utils.Reference;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 public class PlayerToggleShiftEvent implements Listener {
@@ -28,6 +29,11 @@ public class PlayerToggleShiftEvent implements Listener {
         } else {
             onPlayerStopSneaking(p);
         }
+    }
+
+    @EventHandler
+    public void onPlayerPickItem(EntityPickupItemEvent e) {
+        System.out.println(e.getItem().getItemStack().hashCode());
     }
 
 }

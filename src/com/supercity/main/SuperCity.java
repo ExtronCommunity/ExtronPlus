@@ -1,11 +1,24 @@
 package com.supercity.main;
 
 import com.supercity.main.commands.*;
+import com.supercity.main.backpack.ItemBackPack;
+import com.supercity.main.commands.CommandDontSkipNight;
+import com.supercity.main.commands.CommandGetCustomItem;
+import com.supercity.main.commands.CommandReEnableOnePlayerSleep;
+import com.supercity.main.config.ConfigManager;
+import com.supercity.main.crafting.RecipeBackpack;
 import com.supercity.main.crafting.RecipeCraftingStick;
 import com.supercity.main.crafting.RecipeJetpack;
 import com.supercity.main.enchants.CurseOfBreaking;
 import com.supercity.main.enchants.HeatWalker;
 import com.supercity.main.event.*;
+import com.supercity.main.event.ItemEnchantEvent;
+import com.supercity.main.event.PlayerCloseInventoryEvent;
+import com.supercity.main.event.PlayerCraftItemEvent;
+import com.supercity.main.event.PlayerDieEvent;
+import com.supercity.main.event.PlayerInteractionEvent;
+import com.supercity.main.event.PlayerJoinGameEvent;
+import com.supercity.main.event.PlayerToggleShiftEvent;
 import com.supercity.main.event.custom.CustomEventListener;
 import com.supercity.main.jetpack.JetpackHandler;
 import com.supercity.main.recording.RecordingManager;
@@ -38,11 +51,14 @@ public class SuperCity extends JavaPlugin implements Listener {
         onePlayerSleepHandler = new OnePlayerSleepHandler();
         registerEvents();
         registerHandlers();
-        registerRecipes();
 
         initiatePlayers();
         getLogger().info(ChatColor.GREEN.toString() + "Extron Plus has been successfully loaded!");
         registerEnchants();
+        ConfigManager.init();
+        ItemBackPack.loadAllBackpacks();
+
+        registerRecipes();
     }
 
     public void onDisable() {
@@ -63,8 +79,9 @@ public class SuperCity extends JavaPlugin implements Listener {
         pm.registerEvents(new PlayerMovedEvent(),this);
         pm.registerEvents(this,this);
         pm.registerEvents(onePlayerSleepHandler, this);
-
         Bukkit.getScheduler().scheduleSyncRepeatingTask(SuperCity.INSTANCE, RecordingManager::tick, 0, 1);
+        pm.registerEvents(new PlayerCloseInventoryEvent(), this);
+        pm.registerEvents(new PlayerCraftItemEvent(), this);
     }
 
     private void registerCommands() {
@@ -89,6 +106,7 @@ public class SuperCity extends JavaPlugin implements Listener {
     private void registerRecipes() {
         getServer().addRecipe(new RecipeJetpack());
         getServer().addRecipe(new RecipeCraftingStick());
+        getServer().addRecipe(new RecipeBackpack());
     }
 
     public JetpackHandler getJetpackHandler() {

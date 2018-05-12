@@ -1,5 +1,6 @@
 package com.supercity.main.event;
 
+import com.supercity.main.backpack.ItemBackPack;
 import com.supercity.main.inventory.HandItems;
 import com.supercity.main.utils.Reference.ItemData;
 import org.bukkit.block.Block;
@@ -37,11 +38,10 @@ public class PlayerInteractionEvent implements Listener{
         if(heldItems.getRightHandItem().hasItemMeta() && heldItems.getRightHandItem().getItemMeta().hasLocalizedName()) {
             if(heldItems.getRightHandItem().getItemMeta().getLocalizedName().equals(ItemData.CRAFTING_TABLE_STICK.getLocName())) {
                 player.openWorkbench(player.getLocation(), true);
+            } else if(ItemBackPack.isBackpack(heldItems.getRightHandItem())) {
+                ItemBackPack.displayToPlayer(player, ItemBackPack.getBackpackId(heldItems.getRightHandItem()));
             }
         }
-
-
-
     }
 
     /**
