@@ -94,7 +94,7 @@ public class ItemBackPack extends CustomItem {
         try {
             ItemStack item = new ItemStack(Material.valueOf(material), count, damage);
             String nbt = config.getString(configPath + ".nbt");
-            if(!nbt.isEmpty()) {
+            if(!nbt.trim().isEmpty()) {
                 item = NBTUtils.applyStringNBTToItem(item, config.getString(configPath + ".nbt"));
             }
             return item;

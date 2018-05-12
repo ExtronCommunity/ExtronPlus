@@ -64,6 +64,9 @@ public class NBTUtils {
     private static String getStringNBTTagFromItemStack(Object nmsItemStack) {
         try {
             Object tag = nmsItemStack.getClass().getDeclaredMethod("getTag").invoke(nmsItemStack);
+            if(tag == null) {
+                return "{}";
+            }
             return (String) tag.getClass().getDeclaredMethod("toString").invoke(tag);
         } catch (Exception e) {
             e.printStackTrace();
