@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Reference {
@@ -40,6 +41,8 @@ public class Reference {
 
     public static final int ONE_PLAYER_SLEEP_COOLDOWN = 80;
     public static final int AFK_TIMER_LIMIT = 1200;
+
+    public static final List<Material> CROPS = Arrays.asList(Material.CROPS, Material.CARROT, Material.POTATO, Material.BEETROOT_BLOCK);
 
 
     public static final int ROWS_IN_BACKPACK = ConfigManager.backpackConfig.get().getInt("rows", 2);
