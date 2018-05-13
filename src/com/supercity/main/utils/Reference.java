@@ -48,7 +48,7 @@ public class Reference {
     public static final List<Location> TRAPPED_SIGNS_LOCATIONS = new ArrayList<>();
 
     public enum ItemData {
-        JETPACK(Material.ELYTRA, "§6Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),
+        JETPACK(Material.ELYTRA, "Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),
         PICK(Material.DIAMOND_PICKAXE, "DiamondPickaxe", "BreakingPickaxe", false, PickaxeCurseOfBreaking.class, "§cCurse of Breaking"),
         CRAFTING_TABLE_STICK(Material.STICK, "§6Crafting Table on a stick", "craftingTableStick", false, CraftingTableStick.class),
         BACKPACK(Material.LEATHER, "§6Backpack", "backpack", false, ItemBackPack.class),
