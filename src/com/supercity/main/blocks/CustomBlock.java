@@ -1,9 +1,13 @@
 package com.supercity.main.blocks;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 
-public abstract class CustomBlock {
+public abstract class CustomBlock implements Listener {
 
     /**
      * The idCount of the block. used for registry and differentiation.
@@ -29,7 +33,7 @@ public abstract class CustomBlock {
      * When a player places this block.
      * @return Cancel the event or not.
      */
-    public boolean onPlacedBy(Player p) {
+    public boolean onPlacedBy(Player p, Location loc) {
         return true;
     }
 
@@ -44,7 +48,7 @@ public abstract class CustomBlock {
     /**
      * When a player right clicks this placed block.
      */
-    public void onRightClick(Player p) {
+    public void onRightClick(Player p, Block block) {
 
     }
 
@@ -56,6 +60,14 @@ public abstract class CustomBlock {
     }
 
     public void onRedstoneActivated() {
+
+    }
+
+    public boolean isTickable() {
+        return false;
+    }
+
+    public void onTick(Block b) {
 
     }
 

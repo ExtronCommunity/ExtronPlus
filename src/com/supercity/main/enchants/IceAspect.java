@@ -1,30 +1,35 @@
 package com.supercity.main.enchants;
 
+import com.supercity.main.SuperCity;
 import com.supercity.main.event.result.DamageResult;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
-public class Lifesteal extends CustomEnchant {
+import java.util.Random;
+
+public class IceAspect extends CustomEnchant {
     @Override
     public String getId() {
-        return "lifesteal";
+        return "ice_aspect";
     }
 
     @Override
     public String getName() {
-        return "Lifesteal";
+        return "Ice Aspect";
     }
 
     @Override
     public int getMaxLevel() {
-        return 1;
+        return 2;
     }
 
     @Override
@@ -34,7 +39,7 @@ public class Lifesteal extends CustomEnchant {
 
     @Override
     public boolean hasConflict(Enchantment e) {
-        return false;
+        return e == Enchantment.FIRE_ASPECT;
     }
 
     @Override
@@ -54,13 +59,13 @@ public class Lifesteal extends CustomEnchant {
 
     @Override
     public EnchRarity getRarity() {
-        return EnchRarity.LEGENDARY;
+        return EnchRarity.EPIC;
     }
 
     @Override
     protected DamageResult onUseAtEntity(Player damager, Entity target, double damage) {
-        if (damager.getHealth() <= 19.0) {
-            damager.setHealth(damager.getHealth() + 1);
+        if (target instanceof LivingEntity) {
+            ((LivingEntity) target).addPotionEffect(new PotionEffect(PotionEffectType.SLOW,50 * getEnchantLevel(damager),2));
         }
         return super.onUseAtEntity(damager, target, damage);
     }

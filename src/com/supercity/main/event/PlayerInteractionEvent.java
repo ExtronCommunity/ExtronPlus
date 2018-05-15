@@ -1,6 +1,7 @@
 package com.supercity.main.event;
 
 import com.supercity.main.backpack.ItemBackPack;
+import com.supercity.main.blocks.CustomBlockStorage;
 import com.supercity.main.inventory.HandItems;
 import com.supercity.main.utils.Reference.ItemData;
 import org.bukkit.block.Block;
@@ -66,6 +67,7 @@ public class PlayerInteractionEvent implements Listener{
      */
     public void onPlayerRightClickBlock(Player player, Block block, BlockFace clickedFace) {
         //player.sendMessage("Right Click Block!");
+        if (CustomBlockStorage.onRightClickBlock(player,block)) return;
         ItemStack rightHandItem = player.getInventory().getItemInMainHand();
         if(rightHandItem.hasItemMeta() && rightHandItem.getItemMeta().hasLocalizedName()) {
             if(rightHandItem.getItemMeta().getLocalizedName().equals(ItemData.CRAFTING_TABLE_STICK.getLocName())) {

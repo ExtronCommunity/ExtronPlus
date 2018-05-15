@@ -24,3 +24,7 @@ commands:
     description: "Toggles the visibility of chat messages from other players!"
     usage: "/togglechat"
     aliases: ["togglechat","silent"]
+  customEnchant:
+    description: "Enchants held item of the executor with custom enchantment <id> of level [level]"
+    usage: "/customenchant <id> [level]"
+    aliases: ["customench"]

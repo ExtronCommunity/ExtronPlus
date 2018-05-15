@@ -11,11 +11,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.supercity.main.enchants.CustomEnchant;
+import com.supercity.main.enchants.EnchRarity;
+import net.minecraft.server.v1_12_R1.ContainerEnchantTable;
+import net.minecraft.server.v1_12_R1.EntityPlayer;
 import org.bukkit.ChatColor;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemEnchantEvent implements Listener {
@@ -25,66 +32,79 @@ public class ItemEnchantEvent implements Listener {
     @EventHandler
     public void enchant(EnchantItemEvent e) {
         Random r = new Random();
-        List<Enchantment> validEnchs = new ArrayList<>();
+        List<CustomEnchant> validEnchs = new ArrayList<>();
 
-        for (Enchantment en : SuperCity.INSTANCE.customEnchants) {
-            if (en.getItemTarget().includes(e.getItem())) {
-                validEnchs.add(en);
+        for (CustomEnchant ce : SuperCity.INSTANCE.customEnchants) {
+            if (ce.isValid(e) && ce.isCustomValid(validEnchs)) {
+                validEnchs.add(ce);
             }
         }
-
-        if (r.nextInt(e.getEnchantsToAdd().size() + 1) == 0) {
-            System.out.println("adding enchant");
-            Enchantment ench = null;
-            if (validEnchs.size() > 1) {
-                ench = validEnchs.get(r.nextInt(validEnchs.size()));
-            } else if (validEnchs.size() == 1 && r.nextInt(5) == 0) {
-                ench = validEnchs.get(0);
-            }
-
-            if (ench != null) {
-                System.out.println("the enchant is " + ench.getName());
-                int level = this.getPreferredLevel(ench, e.getEnchantsToAdd().size(), e.getExpLevelCost(), r);
-                e.getEnchantsToAdd().put(ench, level);
-                ItemMeta m = e.getItem().getItemMeta();
-                List<String> lore = m.getLore();
-                if (lore == null) {
-                    lore = new ArrayList<>();
+        if (validEnchs.isEmpty()) return;
+        if (r.nextInt(3) == 0) {
+            int i = r.nextInt(100);
+            EnchRarity rarity = EnchRarity.get(i);
+            if (rarity != null) {
+                validEnchs.removeIf((n)->n.getRarity() != rarity);
+                CustomEnchant ench;
+                if (validEnchs.isEmpty()) {
+                    return;
                 }
-
-                lore.add(ChatColor.GRAY + ench.getName() + " " + getLevelSign(level, ench.getMaxLevel()));
-                m.setLore(lore);
-                e.getItem().setItemMeta(m);
+                if (validEnchs.size() == 1) {
+                    ench = validEnchs.get(0);
+                } else {
+                    ench = validEnchs.get(r.nextInt(validEnchs.size()));
+                }
+                if (ench != null) {
+                    int level = getPreferredLevel(e.getExpLevelCost(), ench.getMaxLevel(), rarity, r);
+                    if (level <= 0) {
+                        return;
+                    }
+                    EntityPlayer p = ((CraftPlayer)e.getEnchanter()).getHandle();
+                    if (p.activeContainer instanceof ContainerEnchantTable) {
+                        ContainerEnchantTable table = (ContainerEnchantTable) p.activeContainer;
+                        ench.addToItem(e.getItem(),level);
+                        table.enchantSlots.update();
+                    }
+                }
             }
         }
     }
 
-    public static String getLevelSign(int level, int maxLevel) {
-        if (maxLevel == 1) {
-            return "";
-        } else if (level == 1) {
-            return "I";
-        } else if (level == 2) {
-            return "II";
-        } else if (level == 3) {
-            return "III";
-        } else if (level == 4) {
-            return "IV";
-        } else {
-            return level == 5 ? "V" : String.valueOf(level);
+    public int getPreferredLevel(int cost, int max, EnchRarity rarity, Random r) {
+        if (cost == 2) {
+            if (rarity == EnchRarity.COMMON) {
+                return r.nextInt(2) == 0 ? 0 : max;
+            }
+            if (rarity == EnchRarity.RARE) {
+                return max;
+            }
+            if (max > 3) {
+                return max - 1;
+            }
+            return max;
         }
+        if (cost == 1) {
+            if (rarity == EnchRarity.LEGENDARY) {
+                return 0;
+            }
+            if (max >= 5) {
+                return max - 3;
+            }
+            if (max > 3) {
+                return r.nextInt(max - 2) + 1;
+            }
+            return max;
+        }
+        if (cost == 0) {
+            if (rarity == EnchRarity.EPIC || rarity == EnchRarity.LEGENDARY) {
+                return 0;
+            }
+            if (max >= 3) {
+                return 2;
+            }
+            return r.nextInt(2) + 1;
+        }
+        return 1;
     }
 
-    private int getPreferredLevel(Enchantment ench, int size, int cost, Random r) {
-        int max = ench.getMaxLevel();
-        if (max == 1) {
-            return 1;
-        } else if (cost == 3) {
-            return max > 4 ? max - 1 : max;
-        } else if (cost == 2) {
-            return max > 2 && size > 1 && r.nextInt(size) == 0 ? max - 2 : max - 1;
-        } else {
-            return cost == 1 ? r.nextInt(2) + 1 : 1;
-        }
-    }
 }

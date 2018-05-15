@@ -7,6 +7,6 @@ public class PickaxeCurseOfBreaking extends CustomItem {
 
     public PickaxeCurseOfBreaking() {
         super(Reference.ItemData.PICK);
-        addUnsafeEnchantment(new CurseOfBreaking(), 1);
+        CurseOfBreaking.addTo(this,1);
     }
 }

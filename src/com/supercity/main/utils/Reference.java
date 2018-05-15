@@ -42,12 +42,12 @@ public class Reference {
     public static final int ROWS_IN_BACKPACK = ConfigManager.backpackConfig.get().getInt("rows", 2);
 
     public enum ItemData {
-        JETPACK(Material.ELYTRA, "§6Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),
-        PICK(Material.DIAMOND_PICKAXE, "DiamondPickaxe", "BreakingPickaxe", false, PickaxeCurseOfBreaking.class, "§cCurse of Breaking"),
-        CRAFTING_TABLE_STICK(Material.STICK, "§6Crafting Table on a stick", "craftingTableStick", false, CraftingTableStick.class),
-        BACKPACK(Material.LEATHER, "§6Backpack", "backpack", false, ItemBackPack.class),
-        HEATWALK_BOOTS(Material.DIAMOND_BOOTS,"§cHeatWalker Boots","heatwalkerboots",true, HeatWalkerBoots.class,"§7Heat Walker II"),
-        LIFESTEAL_SWORD(Material.DIAMOND_SWORD,"Diamond Sword","lifestealSword",true, LifestealSword.class,"§7Lifesteal");
+        JETPACK(Material.ELYTRA, "Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),
+        PICK(Material.DIAMOND_PICKAXE, "DiamondPickaxe", "BreakingPickaxe", false, PickaxeCurseOfBreaking.class),
+        CRAFTING_TABLE_STICK(Material.STICK, "Crafting Table on a stick", "craftingTableStick", false, CraftingTableStick.class),
+        BACKPACK(Material.LEATHER, "Backpack", "backpack", false, ItemBackPack.class),
+        HEATWALK_BOOTS(Material.DIAMOND_BOOTS,"HeatWalker Boots","heatwalkerboots",true, HeatWalkerBoots.class),
+        LIFESTEAL_SWORD(Material.DIAMOND_SWORD,"Diamond Sword","lifestealSword",true, LifestealSword.class);
 
         private String displayName, locName;
         private boolean hasEnchantedGlint;
