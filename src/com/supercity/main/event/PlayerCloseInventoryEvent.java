@@ -1,6 +1,6 @@
 package com.supercity.main.event;
 
-import com.supercity.main.backpack.ItemBackPack;
+import com.supercity.main.item.ItemBackPack;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;

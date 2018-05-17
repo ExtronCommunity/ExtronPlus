@@ -1,6 +1,6 @@
 package com.supercity.main.utils;
 
-import com.supercity.main.backpack.ItemBackPack;
+import com.supercity.main.item.ItemBackPack;
 import com.supercity.main.config.ConfigManager;
 import com.supercity.main.item.CraftingTableStick;
 import com.supercity.main.item.CustomItem;
@@ -41,6 +41,8 @@ public class Reference {
 
     public static final int ONE_PLAYER_SLEEP_COOLDOWN = 80;
     public static final int AFK_TIMER_LIMIT = 1200;
+
+    public static final String BACKPACK_TITLE = "Backpack";
 
     public static final List<Material> CROPS = Arrays.asList(Material.CROPS, Material.CARROT, Material.POTATO, Material.BEETROOT_BLOCK);
 

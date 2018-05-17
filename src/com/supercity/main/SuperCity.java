@@ -1,7 +1,7 @@
 package com.supercity.main;
 
-import com.supercity.main.commands.*;
-import com.supercity.main.backpack.ItemBackPack;
+import com.supercity.main.commands.CommandGetBackpack;
+import com.supercity.main.item.ItemBackPack;
 import com.supercity.main.commands.CommandDontSkipNight;
 import com.supercity.main.commands.CommandGetCustomItem;
 import com.supercity.main.commands.CommandReEnableOnePlayerSleep;
@@ -11,17 +11,16 @@ import com.supercity.main.crafting.RecipeCraftingStick;
 import com.supercity.main.crafting.RecipeJetpack;
 import com.supercity.main.enchants.CurseOfBreaking;
 import com.supercity.main.enchants.HeatWalker;
-import com.supercity.main.event.*;
 import com.supercity.main.event.ItemEnchantEvent;
 import com.supercity.main.event.PlayerCloseInventoryEvent;
 import com.supercity.main.event.PlayerCraftItemEvent;
 import com.supercity.main.event.PlayerDieEvent;
+import com.supercity.main.event.PlayerInteractWithInventoryEvent;
 import com.supercity.main.event.PlayerInteractionEvent;
 import com.supercity.main.event.PlayerJoinGameEvent;
 import com.supercity.main.event.PlayerToggleShiftEvent;
 import com.supercity.main.event.custom.CustomEventListener;
 import com.supercity.main.jetpack.JetpackHandler;
-import com.supercity.main.recording.RecordingManager;
 import com.supercity.main.sleep.OnePlayerSleepHandler;
 import com.supercity.main.spawner.SpawnerMovingHandler;
 import com.supercity.main.utils.Reflection;
@@ -82,12 +81,14 @@ public class SuperCity extends JavaPlugin implements Listener {
         //Bukkit.getScheduler().scheduleSyncRepeatingTask(SuperCity.INSTANCE, RecordingManager::tick, 0, 1);
         pm.registerEvents(new PlayerCloseInventoryEvent(), this);
         pm.registerEvents(new PlayerCraftItemEvent(), this);
+        pm.registerEvents(new PlayerInteractWithInventoryEvent(), this);
     }
 
     private void registerCommands() {
         getCommand("getCustomItem").setExecutor(new CommandGetCustomItem());
         getCommand("dontSkipNight").setExecutor(new CommandDontSkipNight());
         getCommand("enableOnePlayerSleep").setExecutor(new CommandReEnableOnePlayerSleep());
+        getCommand("getBackpack").setExecutor(new CommandGetBackpack());
         //getCommand("recording").setExecutor(new CommandRecording());
         //getCommand("togglescoreboard").setExecutor(new CommandToggleSB());
         //getCommand("togglechat").setExecutor(new CommandToggleChat());
