@@ -67,7 +67,7 @@ public class PlayerInteractionEvent implements Listener{
      */
     public void onPlayerRightClickBlock(Player player, Block block, BlockFace clickedFace) {
         //player.sendMessage("Right Click Block!");
-        if (CustomBlockStorage.onRightClickBlock(player,block)) return;
+        if (CustomBlockStorage.onRightClickBlock(player,block,clickedFace)) return;
         ItemStack rightHandItem = player.getInventory().getItemInMainHand();
         if(rightHandItem.hasItemMeta() && rightHandItem.getItemMeta().hasLocalizedName()) {
             if(rightHandItem.getItemMeta().getLocalizedName().equals(ItemData.CRAFTING_TABLE_STICK.getLocName())) {

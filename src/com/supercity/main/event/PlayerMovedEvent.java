@@ -9,8 +9,8 @@ public class PlayerMovedEvent implements Listener {
 
     @EventHandler
     public void move(PlayerMoveEvent e) {
-        //RecordingManager.getSettings(e.getPlayer()).afkTimer = 0;
-        //RecordingManager.setAFK(e.getPlayer(),false);
+        RecordingManager.getSettings(e.getPlayer()).afkTimer = 0;
+        RecordingManager.setAFK(e.getPlayer(),false);
     }
 
 }
