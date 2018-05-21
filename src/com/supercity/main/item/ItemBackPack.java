@@ -1,11 +1,11 @@
-package com.supercity.main.backpack;
+package com.supercity.main.item;
 
 import com.supercity.main.config.ConfigManager;
-import com.supercity.main.item.CustomItem;
 import com.supercity.main.nbt.NBTUtils;
 import com.supercity.main.utils.Reference;
 import com.supercity.main.utils.Reference.ItemData;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -13,6 +13,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -25,21 +26,33 @@ public class ItemBackPack extends CustomItem {
 
     public ItemBackPack() {
         super(ItemData.BACKPACK);
-        System.out.println("Initiated");
     }
 
     public static void assignID(ItemStack item) {
-        ItemMeta meta = item.getItemMeta();
-        meta.setLocalizedName(ItemData.BACKPACK.getLocName() + idCount);
-        System.out.println("Assigned id " + idCount + " to backpack!");
-        item.setItemMeta(meta);
+        assignID(item, idCount);
         idCount++;
         ConfigManager.backpackConfig.get().set("idCount", idCount);
         ConfigManager.backpackConfig.save();
     }
 
+    public static void assignID(ItemStack item, int id) {
+        ItemMeta meta = item.getItemMeta();
+        meta.setLocalizedName(ItemData.BACKPACK.getLocName() + id);
+        System.out.println("Assigned id " + id + " to backpack!");
+        updateIDLore(item, id);
+        item.setItemMeta(meta);
+
+    }
+
+    public static void updateIDLore(ItemStack item, int id) {
+        ItemMeta meta = item.getItemMeta();
+        meta.setLore(Collections.singletonList(ChatColor.GRAY + "#" + id));
+        item.setItemMeta(meta);
+    }
+
     public static void displayToPlayer(Player p, int id) {
-        Inventory inventory = Bukkit.createInventory(null, 9 * Reference.ROWS_IN_BACKPACK, "Backpack");
+        updateIDLore(p.getInventory().getItemInMainHand(), id);
+        Inventory inventory = Bukkit.createInventory(null, 9 * Reference.ROWS_IN_BACKPACK, Reference.BACKPACK_TITLE);
         ItemStack[] items = getItemsFromConfig(id);
         for(int i = 0; i < Reference.ROWS_IN_BACKPACK * 9; i++) {
             inventory.setItem(i, items[i]);
@@ -110,15 +123,11 @@ public class ItemBackPack extends CustomItem {
 
 
     public static boolean isBackpack(ItemStack i) {
-        return i.getItemMeta().getLocalizedName().startsWith(ItemData.BACKPACK.getLocName());
-    }
-
-    public static ItemBackPack toBackpack(ItemStack i) {
-        if(!hasId(i)) {
-            assignID(i);
+        try {
+            return i.getItemMeta().getLocalizedName().startsWith(ItemData.BACKPACK.getLocName());
+        } catch (Exception e) {
+            return false;
         }
-        System.out.println(Integer.parseInt(i.getItemMeta().getLocalizedName().substring(ItemData.BACKPACK.getLocName().length())));
-        return backpacks.get(Integer.parseInt(i.getItemMeta().getLocalizedName().substring(ItemData.BACKPACK.getLocName().length())));
     }
 
     public static boolean hasId(ItemStack i) {

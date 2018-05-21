@@ -1,10 +1,7 @@
 package com.supercity.main;
 
 import com.supercity.main.commands.*;
-import com.supercity.main.backpack.ItemBackPack;
-import com.supercity.main.commands.CommandDontSkipNight;
-import com.supercity.main.commands.CommandGetCustomItem;
-import com.supercity.main.commands.CommandReEnableOnePlayerSleep;
+import com.supercity.main.item.ItemBackPack;
 import com.supercity.main.config.ConfigManager;
 import com.supercity.main.crafting.RecipeBackpack;
 import com.supercity.main.crafting.RecipeCraftingStick;
@@ -12,10 +9,13 @@ import com.supercity.main.crafting.RecipeJetpack;
 import com.supercity.main.crafting.SmeltingIncSack;
 import com.supercity.main.enchants.*;
 import com.supercity.main.event.*;
+import com.supercity.main.enchants.CurseOfBreaking;
+import com.supercity.main.enchants.HeatWalker;
 import com.supercity.main.event.ItemEnchantEvent;
 import com.supercity.main.event.PlayerCloseInventoryEvent;
 import com.supercity.main.event.PlayerCraftItemEvent;
 import com.supercity.main.event.PlayerDieEvent;
+import com.supercity.main.event.PlayerInteractWithInventoryEvent;
 import com.supercity.main.event.PlayerInteractionEvent;
 import com.supercity.main.event.PlayerJoinGameEvent;
 import com.supercity.main.event.PlayerToggleShiftEvent;
@@ -81,6 +81,7 @@ public class SuperCity extends JavaPlugin implements Listener {
         pm.registerEvents(new PlayerCloseInventoryEvent(), this);
         pm.registerEvents(new PlayerCraftItemEvent(), this);
         pm.registerEvents(new LegacyEnchantConvertor(),this);
+        pm.registerEvents(new PlayerInteractWithInventoryEvent(), this);
     }
 
     private void registerCommands() {
@@ -91,6 +92,7 @@ public class SuperCity extends JavaPlugin implements Listener {
         getCommand("recording").setExecutor(new CommandRecording());
         getCommand("togglescoreboard").setExecutor(new CommandToggleSB());
         getCommand("togglechat").setExecutor(new CommandToggleChat());
+        getCommand("getBackpack").setExecutor(new CommandGetBackpack());
     }
 
     private void registerHandlers() {

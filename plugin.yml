@@ -28,3 +28,7 @@ commands:
     description: "Enchants held item of the executor with custom enchantment <id> of level [level]"
     usage: "/customenchant <id> [level]"
     aliases: ["customench"]
+  getBackpack:
+    description: "Get a backpack with a set id"
+    usage: "/getbackpack <id>"
+    aliases: ["backpack"]

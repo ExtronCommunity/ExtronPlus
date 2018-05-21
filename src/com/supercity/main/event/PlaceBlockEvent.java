@@ -1,6 +1,5 @@
 package com.supercity.main.event;
 
-import com.supercity.main.blocks.CustomBlockStorage;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,6 +16,5 @@ public class PlaceBlockEvent implements Listener {
 
     private boolean onPlayerPlaceBlock(Player player, Block blockPlaced, ItemStack itemInHand) {
         return false;
-        player.setResourcePack();
     }
 }

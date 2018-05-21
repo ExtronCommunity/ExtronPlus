@@ -1,6 +1,7 @@
 package com.supercity.main.item;
 
 import com.supercity.main.utils.Reference.ItemData;
+import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -17,7 +18,7 @@ public abstract class CustomItem extends ItemStack {
         this.data = data;
         ItemMeta meta = getItemMeta();
         meta.setLocalizedName(data.getLocName());
-        meta.setDisplayName(data.getDisplayName());
+        meta.setDisplayName(ChatColor.WHITE + data.getDisplayName());
         if(data.hasEnchantedGlint()) {
             meta.addEnchant(Enchantment.DURABILITY, 1, false);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);

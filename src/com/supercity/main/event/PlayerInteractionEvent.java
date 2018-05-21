@@ -1,8 +1,10 @@
 package com.supercity.main.event;
 
-import com.supercity.main.backpack.ItemBackPack;
 import com.supercity.main.blocks.CustomBlockStorage;
+import com.supercity.main.item.ItemBackPack;
+import com.supercity.main.crops.CropRightClickManager;
 import com.supercity.main.inventory.HandItems;
+import com.supercity.main.utils.Reference;
 import com.supercity.main.utils.Reference.ItemData;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -77,6 +79,10 @@ public class PlayerInteractionEvent implements Listener{
                     ItemBackPack.assignID(rightHandItem);
                 }
                 ItemBackPack.displayToPlayer(player, ItemBackPack.getBackpackId(rightHandItem));
+            }
+        } else if(Reference.CROPS.contains(block.getType())) {
+            if (CropRightClickManager.isMature(block)) {
+                CropRightClickManager.handleCropClick(block);
             }
         }
     }

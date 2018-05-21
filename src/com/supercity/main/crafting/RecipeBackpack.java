@@ -1,7 +1,7 @@
 package com.supercity.main.crafting;
 
 import com.supercity.main.SuperCity;
-import com.supercity.main.backpack.ItemBackPack;
+import com.supercity.main.item.ItemBackPack;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ShapedRecipe;
