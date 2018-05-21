@@ -2,18 +2,26 @@ package com.supercity.main.event;
 
 import com.supercity.main.blocks.CustomBlockStorage;
 import com.supercity.main.item.ItemBackPack;
+import com.supercity.main.SuperCity;
+import com.supercity.main.config.ConfigManager;
 import com.supercity.main.crops.CropRightClickManager;
 import com.supercity.main.inventory.HandItems;
 import com.supercity.main.utils.Reference;
 import com.supercity.main.utils.Reference.ItemData;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Sign;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerInteractionEvent implements Listener{
 
@@ -85,6 +93,51 @@ public class PlayerInteractionEvent implements Listener{
                 CropRightClickManager.handleCropClick(block);
             }
         }
+        if (block.getType() == Material.SIGN || block.getType() == Material.SIGN_POST) {
+            if (player.isSneaking()) {
+                if (rightHandItem.getType() == Material.TRIPWIRE_HOOK) {
+                    if (!Reference.TRAPPED_SIGNS_LOCATIONS.contains(block.getLocation())) {
+                        rightHandItem.setAmount(rightHandItem.getAmount() - 1);
+                        if (rightHandItem.getAmount() > 0) {
+                            player.getInventory().setItemInMainHand(rightHandItem);
+                        } else {
+                            player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
+                        }
+                        Location loc = block.getLocation();
+                        Reference.TRAPPED_SIGNS_LOCATIONS.add(loc);
+                        FileConfiguration config = ConfigManager.trappedSignsConfig.get();
+                        int i = config.getKeys(false).size();
+                        config.set(i + ".x",loc.getBlockX());
+                        config.set(i + ".y",loc.getBlockY());
+                        config.set(i + ".z",loc.getBlockZ());
+                        config.set(i + ".world",loc.getWorld().getName());
+                    }
+                }
+            } else {
+                if (Reference.TRAPPED_SIGNS_LOCATIONS.contains(block.getLocation())) {
+                    activate(block,(Sign)block.getState().getData());
+                }
+            }
+        }
+    }
+
+    private void activate(Block b, Sign sign) {
+        Block rb;
+        if (sign.isWallSign()) {
+            rb = b.getRelative(sign.getAttachedFace());
+        } else {
+            rb = b.getLocation().getBlock();
+        }
+        Material m = rb.getType();
+        byte data = rb.getData();
+        BlockState state = rb.getState();
+        rb.setType(Material.REDSTONE_BLOCK);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                rb.setType(m);
+            }
+        }.runTaskLater(SuperCity.INSTANCE,20);
     }
 
     /**

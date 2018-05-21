@@ -1,5 +1,6 @@
 package com.supercity.main.recording;
 
+import com.supercity.main.config.ConfigManager;
 import com.supercity.main.utils.Reference;
 import com.supercity.main.utils.Reflection;
 import org.bukkit.Bukkit;
@@ -16,15 +17,20 @@ public class RecordingManager {
     private static Map<UUID,RecordingSettings> settings = new HashMap<>();
     private static Scoreboard main;
     private static Scoreboard hiddenPlayed;
+    private static boolean enabled;
 
-    static {
-        main = Bukkit.getScoreboardManager().getMainScoreboard();
-        TeamType.initAll(main);
-        hiddenPlayed = Bukkit.getScoreboardManager().getNewScoreboard();
-        TeamType.initAll(hiddenPlayed);
+    public static void init() {
+        enabled = ConfigManager.config.getBoolean("recordingEnabled",true);
+        if (enabled) {
+            main = Bukkit.getScoreboardManager().getMainScoreboard();
+            TeamType.initAll(main);
+            hiddenPlayed = Bukkit.getScoreboardManager().getNewScoreboard();
+            TeamType.initAll(hiddenPlayed);
+        }
     }
 
     public static void copyHealthFromMain() {
+        if (!enabled) return;
         Objective h = hiddenPlayed.registerNewObjective("health","health");
         h.setDisplayName("Health");
         h.setDisplaySlot(DisplaySlot.PLAYER_LIST);
@@ -36,6 +42,7 @@ public class RecordingManager {
     }
 
     private static void copyHealth(Player p) {
+        if (!enabled) return;
         Objective health = main.getObjective("health");
         if (health == null) {
             return;
@@ -49,6 +56,7 @@ public class RecordingManager {
     }
 
     public static void setRecording(Player p, boolean b) {
+        if (!enabled) return;
         getSettings(p).setRecording(b);
         for (Player pl : Bukkit.getOnlinePlayers()) {
             if (pl != p) {
@@ -88,6 +96,7 @@ public class RecordingManager {
     }
 
     public static void toggleScoreboard(Player p) {
+        if (!enabled) return;
         boolean b = getSettings(p).showScoreboard();
         getSettings(p).setShowScoreboard(!b);
         if (getSettings(p).showScoreboard()) {
@@ -98,6 +107,7 @@ public class RecordingManager {
     }
 
     public static void toggleChat(Player p) {
+        if (!enabled) return;
         getSettings(p).setShowChat(!getSettings(p).showChat());
         if (getSettings(p).showChat()) {
             Reflection.sendActionBar(p,Reference.CHAT_SHOWN);
@@ -107,6 +117,7 @@ public class RecordingManager {
     }
 
     public static void tick() {
+        if (!enabled) return;
         for (Player p : Bukkit.getOnlinePlayers()) {
             getSettings(p).afkTimer++;
             if (getSettings(p).afkTimer > Reference.AFK_TIMER_LIMIT && !getSettings(p).isAFK()) {
@@ -123,6 +134,7 @@ public class RecordingManager {
     }
 
     private static void changePlayedScore(Player p, int i) {
+        if (!enabled) return;
         Objective played = main.getObjective("played");
         if (played == null) {
             played = main.registerNewObjective("played","stat.playOneMinute");
@@ -134,6 +146,7 @@ public class RecordingManager {
     }
 
     public static void setAFK(Player p, boolean b) {
+        if (!enabled) return;
         getSettings(p).setAFK(b);
         if (b) {
             TeamType.AFK.join(p);
@@ -145,14 +158,32 @@ public class RecordingManager {
     }
 
     public static void setAllNotAFK() {
+        if (!enabled) return;
         for (Player p : Bukkit.getOnlinePlayers()) {
             setAFK(p,false);
         }
     }
 
     public static void playerJoin(Player p) {
+        if (!enabled) return;
         copyHealth(p);
         TeamType.DEFAULT.join(p);
+    }
+
+    public static void enable() {
+        enabled = true;
+        ConfigManager.config.set("recordingEnabled",true);
+        ConfigManager.saveConfig();
+    }
+
+    public static void disable() {
+        enabled = false;
+        ConfigManager.config.set("recordingEnabled",false);
+        ConfigManager.saveConfig();
+    }
+
+    public static boolean isEnabled() {
+        return enabled;
     }
 
     public enum TeamType {

@@ -9,6 +9,9 @@ import com.supercity.main.crafting.RecipeJetpack;
 import com.supercity.main.crafting.SmeltingIncSack;
 import com.supercity.main.enchants.*;
 import com.supercity.main.event.*;
+import com.supercity.main.creepers.CommandCreeperCheck;
+import com.supercity.main.creepers.CreeperChecker;
+import com.supercity.main.creepers.CreeperEvents;
 import com.supercity.main.enchants.CurseOfBreaking;
 import com.supercity.main.enchants.HeatWalker;
 import com.supercity.main.event.ItemEnchantEvent;
@@ -46,20 +49,24 @@ public class SuperCity extends JavaPlugin implements Listener {
         INSTANCE = this;
         registerCommands();
         onePlayerSleepHandler = new OnePlayerSleepHandler();
+        ConfigManager.init();
+        RecordingManager.init();
         registerEvents();
         registerHandlers();
 
         initiatePlayers();
+        getLogger().info(ChatColor.GREEN.toString() + "Super City has been successfully loaded!");
         registerEnchants();
         getLogger().info(ChatColor.GREEN.toString() + "Extron Plus has been successfully loaded!");
-        ConfigManager.init();
         ItemBackPack.loadAllBackpacks();
 
         registerRecipes();
+        CreeperChecker.load();
     }
 
     public void onDisable() {
         RecordingManager.setAllNotAFK();
+        CreeperChecker.save();
     }
 
     private void registerEvents() {
@@ -75,13 +82,16 @@ public class SuperCity extends JavaPlugin implements Listener {
         pm.registerEvents(new PlaceBlockEvent(),this);
         pm.registerEvents(new ChatMessageEvent(),this);
         pm.registerEvents(new PlayerMovedEvent(),this);
+        pm.registerEvents(new PlayerBreakBlock(),this);
+        //pm.registerEvents(new ChatMessageEvent(),this);
+        //pm.registerEvents(new PlayerMovedEvent(),this);
         pm.registerEvents(this,this);
         pm.registerEvents(onePlayerSleepHandler, this);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(SuperCity.INSTANCE, RecordingManager::tick, 0, 1);
         pm.registerEvents(new PlayerCloseInventoryEvent(), this);
         pm.registerEvents(new PlayerCraftItemEvent(), this);
-        pm.registerEvents(new LegacyEnchantConvertor(),this);
         pm.registerEvents(new PlayerInteractWithInventoryEvent(), this);
+        pm.registerEvents(new CreeperEvents(),this);
     }
 
     private void registerCommands() {
@@ -93,6 +103,7 @@ public class SuperCity extends JavaPlugin implements Listener {
         getCommand("togglescoreboard").setExecutor(new CommandToggleSB());
         getCommand("togglechat").setExecutor(new CommandToggleChat());
         getCommand("getBackpack").setExecutor(new CommandGetBackpack());
+        getCommand("creeper").setExecutor(new CommandCreeperCheck());
     }
 
     private void registerHandlers() {

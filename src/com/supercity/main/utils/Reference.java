@@ -4,12 +4,14 @@ import com.supercity.main.item.ItemBackPack;
 import com.supercity.main.config.ConfigManager;
 import com.supercity.main.item.*;
 import com.supercity.main.jetpack.ItemJetpack;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Reference {
 
@@ -43,8 +45,9 @@ public class Reference {
 
     public static final List<Material> CROPS = Arrays.asList(Material.CROPS, Material.CARROT, Material.POTATO, Material.BEETROOT_BLOCK);
 
-
     public static final int ROWS_IN_BACKPACK = ConfigManager.backpackConfig.get().getInt("rows", 2);
+
+    public static final List<Location> TRAPPED_SIGNS_LOCATIONS = new ArrayList<>();
 
     public enum ItemData {
         JETPACK(Material.ELYTRA, "Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),

@@ -16,11 +16,13 @@ public class PlayerInteractWithInventoryEvent implements Listener {
     @EventHandler
     public void onInventoryInteraction(InventoryClickEvent e) {
         Inventory i = e.getInventory();
-        ItemStack checkItem = e.getCurrentItem().getType() == Material.AIR?e.getCursor():e.getCurrentItem();
-        if (e.getClickedInventory() instanceof PlayerInventory && this.isTaking(e.getAction())) {
-            if (i.getTitle().equals(Reference.BACKPACK_TITLE)) {
-                if (ItemBackPack.isBackpack(checkItem)) {
-                    e.setCancelled(true);
+        if (e.getCurrentItem() != null) {
+            ItemStack checkItem = e.getCurrentItem().getType() == Material.AIR ? e.getCursor() : e.getCurrentItem();
+            if (e.getClickedInventory() instanceof PlayerInventory && this.isTaking(e.getAction())) {
+                if (i.getTitle().equals(Reference.BACKPACK_TITLE)) {
+                    if (ItemBackPack.isBackpack(checkItem)) {
+                        e.setCancelled(true);
+                    }
                 }
             }
         }
