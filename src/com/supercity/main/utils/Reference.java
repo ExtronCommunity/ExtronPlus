@@ -55,7 +55,8 @@ public class Reference {
         CRAFTING_TABLE_STICK(Material.STICK, "Crafting Table on a stick", "craftingTableStick", false, CraftingTableStick.class),
         BACKPACK(Material.LEATHER, "Backpack", "backpack", false, ItemBackPack.class),
         HEATWALK_BOOTS(Material.DIAMOND_BOOTS,"HeatWalker Boots","heatwalkerboots",true, HeatWalkerBoots.class),
-        LIFESTEAL_SWORD(Material.DIAMOND_SWORD,"Diamond Sword","lifestealSword",true, LifestealSword.class);
+        LIFESTEAL_SWORD(Material.DIAMOND_SWORD,"Diamond Sword","lifestealSword",true, LifestealSword.class),
+        LIRRA(Material.PAPER,"Lirra","lirraBill",false,ItemLirra.class);
 
         private String displayName, locName;
         private boolean hasEnchantedGlint;

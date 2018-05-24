@@ -1,12 +1,9 @@
 package com.supercity.main;
 
 import com.supercity.main.commands.*;
+import com.supercity.main.crafting.*;
 import com.supercity.main.item.ItemBackPack;
 import com.supercity.main.config.ConfigManager;
-import com.supercity.main.crafting.RecipeBackpack;
-import com.supercity.main.crafting.RecipeCraftingStick;
-import com.supercity.main.crafting.RecipeJetpack;
-import com.supercity.main.crafting.SmeltingIncSack;
 import com.supercity.main.enchants.*;
 import com.supercity.main.event.*;
 import com.supercity.main.creepers.CommandCreeperCheck;
@@ -56,7 +53,7 @@ public class SuperCity extends JavaPlugin implements Listener {
 
         initiatePlayers();
         getLogger().info(ChatColor.GREEN.toString() + "Super City has been successfully loaded!");
-        registerEnchants();
+        //registerEnchants();
         getLogger().info(ChatColor.GREEN.toString() + "Extron Plus has been successfully loaded!");
         ItemBackPack.loadAllBackpacks();
 
@@ -75,7 +72,7 @@ public class SuperCity extends JavaPlugin implements Listener {
         pm.registerEvents(new PlayerJoinGameEvent(), this);
         pm.registerEvents(new PlayerDieEvent(), this);
         pm.registerEvents(new PlayerToggleShiftEvent(), this);
-        pm.registerEvents(new ItemEnchantEvent(), this);
+        //pm.registerEvents(new ItemEnchantEvent(), this);
         pm.registerEvents(new CustomEventListener(), this);
         pm.registerEvents(new SpawnerMovingHandler(), this);
         pm.registerEvents(new MobSpawnEvent(),this);
@@ -104,6 +101,8 @@ public class SuperCity extends JavaPlugin implements Listener {
         getCommand("togglechat").setExecutor(new CommandToggleChat());
         getCommand("getBackpack").setExecutor(new CommandGetBackpack());
         getCommand("creeper").setExecutor(new CommandCreeperCheck());
+        getCommand("money").setExecutor(new CommandMoney());
+        getCommand("money").setTabCompleter(new CommandMoney());
     }
 
     private void registerHandlers() {
@@ -121,8 +120,9 @@ public class SuperCity extends JavaPlugin implements Listener {
         getServer().addRecipe(new RecipeJetpack());
         getServer().addRecipe(new RecipeCraftingStick());
         getServer().addRecipe(new RecipeBackpack());
-
+        getServer().addRecipe(new RecipeUncraftQuartz());
         getServer().addRecipe(new SmeltingIncSack());
+        SmeltingConcrete.addAll();
     }
 
     public JetpackHandler getJetpackHandler() {

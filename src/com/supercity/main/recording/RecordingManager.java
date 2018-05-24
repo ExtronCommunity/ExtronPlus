@@ -174,6 +174,7 @@ public class RecordingManager {
         enabled = true;
         ConfigManager.config.set("recordingEnabled",true);
         ConfigManager.saveConfig();
+        init();
     }
 
     public static void disable() {

@@ -36,3 +36,4 @@ commands:
     description: "Checks if a block was exploded by a creeper and who caused that."
     usage: "/creeper"
     aliases: ["whoexploded","creeperinfo"]
+  money:

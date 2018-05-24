@@ -19,7 +19,7 @@ import java.util.Set;
 
 public class ItemBackPack extends CustomItem {
 
-    public static final HashMap<Integer, ItemBackPack> backpacks = new HashMap<>();
+    //public static final HashMap<Integer, ItemBackPack> backpacks = new HashMap<>();
     public static final HashMap<Inventory, Integer> backpackInventories = new HashMap<>();
 
     public static int idCount = ConfigManager.backpackConfig.get().getInt("idCount", 0);
