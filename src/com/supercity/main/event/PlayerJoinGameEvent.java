@@ -11,6 +11,6 @@ public class PlayerJoinGameEvent implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         SuperCity.INSTANCE.getJetpackHandler().initiatePlayer(e.getPlayer());
-        //RecordingManager.playerJoin(e.getPlayer());
+        RecordingManager.playerJoin(e.getPlayer());
     }
 }

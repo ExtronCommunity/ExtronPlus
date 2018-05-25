@@ -24,7 +24,16 @@ commands:
     description: "Toggles the visibility of chat messages from other players!"
     usage: "/togglechat"
     aliases: ["togglechat","silent"]
+  customEnchant:
+    description: "Enchants held item of the executor with custom enchantment <id> of level [level]"
+    usage: "/customenchant <id> [level]"
+    aliases: ["customench"]
   getBackpack:
     description: "Get a backpack with a set id"
     usage: "/getbackpack <id>"
     aliases: ["backpack"]
+  creeper:
+    description: "Checks if a block was exploded by a creeper and who caused that."
+    usage: "/creeper"
+    aliases: ["whoexploded","creeperinfo"]
+  money:

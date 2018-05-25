@@ -90,7 +90,7 @@ public class OnePlayerSleepHandler implements Listener {
             }
         }
         if(WorldUtils.getOverworld().getTime() == 0){
-            System.out.println("Reseting one player sleep");
+            System.out.println("Resetting one player sleep");
             doSkipNight = true;
             skipCooldown = 0;
         }

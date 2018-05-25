@@ -2,17 +2,16 @@ package com.supercity.main.utils;
 
 import com.supercity.main.item.ItemBackPack;
 import com.supercity.main.config.ConfigManager;
-import com.supercity.main.item.CraftingTableStick;
-import com.supercity.main.item.CustomItem;
-import com.supercity.main.item.HeatWalkerBoots;
-import com.supercity.main.item.PickaxeCurseOfBreaking;
+import com.supercity.main.item.*;
 import com.supercity.main.jetpack.ItemJetpack;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Reference {
 
@@ -46,15 +45,18 @@ public class Reference {
 
     public static final List<Material> CROPS = Arrays.asList(Material.CROPS, Material.CARROT, Material.POTATO, Material.BEETROOT_BLOCK);
 
-
     public static final int ROWS_IN_BACKPACK = ConfigManager.backpackConfig.get().getInt("rows", 2);
+
+    public static final List<Location> TRAPPED_SIGNS_LOCATIONS = new ArrayList<>();
 
     public enum ItemData {
         JETPACK(Material.ELYTRA, "Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),
-        PICK(Material.DIAMOND_PICKAXE, "DiamondPickaxe", "BreakingPickaxe", false, PickaxeCurseOfBreaking.class, "§cCurse of Breaking"),
+        PICK(Material.DIAMOND_PICKAXE, "DiamondPickaxe", "BreakingPickaxe", false, PickaxeCurseOfBreaking.class),
         CRAFTING_TABLE_STICK(Material.STICK, "Crafting Table on a stick", "craftingTableStick", false, CraftingTableStick.class),
         BACKPACK(Material.LEATHER, "Backpack", "backpack", false, ItemBackPack.class),
-        HEATWALK_BOOTS(Material.DIAMOND_BOOTS,"§cHeatWalker Boots","heatwalkerboots",true, HeatWalkerBoots.class,"§7Heat Walker II");
+        HEATWALK_BOOTS(Material.DIAMOND_BOOTS,"HeatWalker Boots","heatwalkerboots",true, HeatWalkerBoots.class),
+        LIFESTEAL_SWORD(Material.DIAMOND_SWORD,"Diamond Sword","lifestealSword",true, LifestealSword.class),
+        LIRRA(Material.PAPER,"Lirra","lirraBill",false,ItemLirra.class);
 
         private String displayName, locName;
         private boolean hasEnchantedGlint;

@@ -26,7 +26,7 @@ public class SpawnerMovingHandler implements Listener {
     public SpawnerMovingHandler() {
         minecarts = new HashMap<>();
         console = Bukkit.getServer().getConsoleSender();
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(SuperCity.INSTANCE, () -> tickSpawnerMinecarts(), 0, 1);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(SuperCity.INSTANCE, this::tickSpawnerMinecarts, 0, 1);
     }
 
     @EventHandler

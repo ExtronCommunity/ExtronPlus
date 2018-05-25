@@ -1,25 +1,21 @@
 package com.supercity.main.enchants;
 
-import com.supercity.main.event.result.DamageResult;
+import com.supercity.main.event.result.EntityResult;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class CurseOfBreaking extends CustomEnchant {
-
-
+public class Sniper extends CustomEnchant {
     @Override
     public String getId() {
-        return "breaking_curse";
+        return "sniper";
     }
 
     @Override
     public String getName() {
-        return "Curse of Breaking";
+        return "Sniper";
     }
 
     @Override
@@ -29,7 +25,7 @@ public class CurseOfBreaking extends CustomEnchant {
 
     @Override
     public EnchantmentTarget getTarget() {
-        return EnchantmentTarget.ALL;
+        return EnchantmentTarget.BOW;
     }
 
     @Override
@@ -49,16 +45,17 @@ public class CurseOfBreaking extends CustomEnchant {
 
     @Override
     public boolean isCursed() {
-        return true;
+        return false;
     }
 
     @Override
     public EnchRarity getRarity() {
-        return EnchRarity.RARE;
+        return EnchRarity.LEGENDARY;
     }
 
     @Override
-    protected DamageResult onLoseDurability(Player player, ItemStack item, int damage) {
-        return new DamageResult(false,damage * 2);
+    protected EntityResult onShootArrow(Player shooter, ItemStack bow, float force, Entity projectile) {
+        projectile.setGravity(false);
+        return super.onShootArrow(shooter, bow, force, projectile);
     }
 }
