@@ -1,12 +1,9 @@
 package com.supercity.main;
 
-<<<<<<< HEAD
 import com.supercity.main.commands.CommandCityCoords;
 import com.supercity.main.commands.CommandGetBackpack;
-=======
 import com.supercity.main.commands.*;
 import com.supercity.main.crafting.*;
->>>>>>> aeb3437e8943e973cad535743372909e2c26a662
 import com.supercity.main.item.ItemBackPack;
 import com.supercity.main.config.ConfigManager;
 import com.supercity.main.enchants.*;
@@ -16,7 +13,6 @@ import com.supercity.main.creepers.CreeperChecker;
 import com.supercity.main.creepers.CreeperEvents;
 import com.supercity.main.enchants.CurseOfBreaking;
 import com.supercity.main.enchants.HeatWalker;
-import com.supercity.main.event.ItemEnchantEvent;
 import com.supercity.main.event.PlayerCloseInventoryEvent;
 import com.supercity.main.event.PlayerCraftItemEvent;
 import com.supercity.main.event.PlayerDieEvent;
@@ -100,7 +96,7 @@ public class SuperCity extends JavaPlugin implements Listener {
         getCommand("getCustomItem").setExecutor(new CommandGetCustomItem());
         getCommand("dontSkipNight").setExecutor(new CommandDontSkipNight());
         getCommand("enableOnePlayerSleep").setExecutor(new CommandReEnableOnePlayerSleep());
-        getCommand("customEnchant").setExecutor(new CommandCustomEnchant());
+        //getCommand("customEnchant").setExecutor(new CommandCustomEnchant());
         getCommand("recording").setExecutor(new CommandRecording());
         getCommand("togglescoreboard").setExecutor(new CommandToggleSB());
         getCommand("togglechat").setExecutor(new CommandToggleChat());
