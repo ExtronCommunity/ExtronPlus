@@ -1,11 +1,10 @@
 package com.supercity.main.recording;
 
+import com.supercity.main.config.ConfigManager;
 import com.supercity.main.utils.Reference;
 import com.supercity.main.utils.Reflection;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_12_R1.scoreboard.CraftScoreboard;
-import org.bukkit.craftbukkit.v1_12_R1.scoreboard.CraftScoreboardManager;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 
@@ -16,8 +15,48 @@ import java.util.UUID;
 public class RecordingManager {
 
     private static Map<UUID,RecordingSettings> settings = new HashMap<>();
+    private static Scoreboard main;
+    private static Scoreboard hiddenPlayed;
+    private static boolean enabled;
+
+    public static void init() {
+        enabled = ConfigManager.config.getBoolean("recordingEnabled",true);
+        if (enabled) {
+            main = Bukkit.getScoreboardManager().getMainScoreboard();
+            TeamType.initAll(main);
+            hiddenPlayed = Bukkit.getScoreboardManager().getNewScoreboard();
+            TeamType.initAll(hiddenPlayed);
+        }
+    }
+
+    public static void copyHealthFromMain() {
+        if (!enabled) return;
+        Objective h = hiddenPlayed.registerNewObjective("health","health");
+        h.setDisplayName("Health");
+        h.setDisplaySlot(DisplaySlot.PLAYER_LIST);
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            copyHealth(p);
+            toggleScoreboard(p);
+            toggleScoreboard(p);
+        }
+    }
+
+    private static void copyHealth(Player p) {
+        if (!enabled) return;
+        Objective health = main.getObjective("health");
+        if (health == null) {
+            return;
+        }
+        Objective health2 = hiddenPlayed.getObjective("health");
+        if (health2 == null) {
+            return;
+        }
+        Score s = health.getScore(p.getName());
+        health2.getScore(p.getName()).setScore(s.getScore());
+    }
 
     public static void setRecording(Player p, boolean b) {
+        if (!enabled) return;
         getSettings(p).setRecording(b);
         for (Player pl : Bukkit.getOnlinePlayers()) {
             if (pl != p) {
@@ -36,50 +75,11 @@ public class RecordingManager {
                 }
             }
         }
-        Scoreboard s;
-        if (getSettings(p).showScoreboard()) {
-            s = Bukkit.getScoreboardManager().getMainScoreboard();
-        } else {
-            s = Bukkit.getScoreboardManager().getNewScoreboard();
-            Objective health = s.getObjective("health");
-            if (health == null) {
-                health = s.registerNewObjective("health","health");
-                health.setDisplaySlot(DisplaySlot.PLAYER_LIST);
-            }
-        }
         if (b) {
-            Team rec = s.getTeam("recording");
-            if (rec == null) {
-                rec = s.registerNewTeam("recording");
-                rec.setPrefix("§c[REC] ");
-                rec.setColor(ChatColor.RED);
-                rec.setOption(Team.Option.NAME_TAG_VISIBILITY,Team.OptionStatus.NEVER);
-            }
-            rec.addEntry(p.getName());
-            for (Player pl : Bukkit.getOnlinePlayers()) {
-                if (!getSettings(pl).showScoreboard()) {
-                    Team r = pl.getScoreboard().getTeam("recording");
-                    if (r != null) r.addEntry(p.getName());
-                }
-            }
+            TeamType.RECORDING.join(p);
         } else {
-            Team t = s.getTeam("team");
-            if (t == null) {
-                t = s.registerNewTeam("team");
-                t.setColor(ChatColor.DARK_PURPLE);
-                t.setPrefix(ChatColor.DARK_PURPLE +"");
-                t.setSuffix(ChatColor.RESET +"");
-                t.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
-            }
-            t.addEntry(p.getName());
-            for (Player pl : Bukkit.getOnlinePlayers()) {
-                if (!getSettings(pl).showScoreboard()) {
-                    Team r = pl.getScoreboard().getTeam("team");
-                    if (r != null) r.addEntry(p.getName());
-                }
-            }
+            TeamType.DEFAULT.join(p);
         }
-        p.setScoreboard(s);
     }
 
     public static RecordingSettings createSettings(Player p) {
@@ -96,83 +96,18 @@ public class RecordingManager {
     }
 
     public static void toggleScoreboard(Player p) {
+        if (!enabled) return;
         boolean b = getSettings(p).showScoreboard();
         getSettings(p).setShowScoreboard(!b);
-        Scoreboard s;
-        if (b) {
-            s = Bukkit.getScoreboardManager().getNewScoreboard();
-            Objective health = s.registerNewObjective("health","health");
-            health.setDisplaySlot(DisplaySlot.PLAYER_LIST);
-            copyHealthFromMain(health);
-            Team r = s.registerNewTeam("recording");
-            Team t = s.registerNewTeam("team");
-            Team a = s.registerNewTeam("afk");
-            for (Player pl : Bukkit.getOnlinePlayers()) {
-                r.setPrefix("§c[REC] ");
-                r.setOption(Team.Option.NAME_TAG_VISIBILITY,Team.OptionStatus.NEVER);
-                if (!getSettings(pl).isAFK() && getSettings(pl).isRecording()) r.addEntry(pl.getName());
-
-                t.setColor(ChatColor.DARK_PURPLE);
-                t.setPrefix(ChatColor.DARK_PURPLE +"");
-                t.setSuffix(ChatColor.RESET +"");
-                t.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
-                if (!getSettings(pl).isAFK() && !getSettings(p).isRecording()) t.addEntry(pl.getName());
-
-                a.setColor(ChatColor.GRAY);
-                a.setPrefix(ChatColor.GRAY + "");
-                a.setSuffix(ChatColor.RESET + "");
-                a.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
-
-                if (getSettings(pl).isAFK()) a.addEntry(pl.getName());
-            }
+        if (getSettings(p).showScoreboard()) {
+            p.setScoreboard(main);
         } else {
-            s = Bukkit.getScoreboardManager().getMainScoreboard();
-        }
-        if (getSettings(p).isRecording()) {
-            Team rec = s.getTeam("recording");
-            if (rec == null){
-                rec = s.registerNewTeam("recording");
-                rec.setPrefix("§c[REC] ");
-                rec.setOption(Team.Option.NAME_TAG_VISIBILITY,Team.OptionStatus.NEVER);
-            }
-            rec.addEntry(p.getName());
-            for (Player pl : Bukkit.getOnlinePlayers()) {
-                if (!getSettings(pl).showScoreboard()) {
-                    Team r = pl.getScoreboard().getTeam("recording");
-                    if (r != null) r.addEntry(p.getName());
-                }
-            }
-        } else {
-            Team t = s.getTeam("team");
-            if (t == null) {
-                t = s.registerNewTeam("team");
-                t.setColor(ChatColor.DARK_PURPLE);
-                t.setPrefix(ChatColor.DARK_PURPLE +"");
-                t.setSuffix(ChatColor.RESET +"");
-                t.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
-            }
-            t.addEntry(p.getName());
-            for (Player pl : Bukkit.getOnlinePlayers()) {
-                if (!getSettings(pl).showScoreboard()) {
-                    Team r = pl.getScoreboard().getTeam("team");
-                    if (r != null) r.addEntry(p.getName());
-                }
-            }
-        }
-        p.setScoreboard(s);
-    }
-
-    private static void copyHealthFromMain(Objective health) {
-        Scoreboard main = Bukkit.getScoreboardManager().getMainScoreboard();
-        Objective h = main.getObjective("health");
-        if (h == null) return;
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            Score s = h.getScore(p.getName());
-            health.getScore(p.getName()).setScore(s.getScore());
+            p.setScoreboard(hiddenPlayed);
         }
     }
 
     public static void toggleChat(Player p) {
+        if (!enabled) return;
         getSettings(p).setShowChat(!getSettings(p).showChat());
         if (getSettings(p).showChat()) {
             Reflection.sendActionBar(p,Reference.CHAT_SHOWN);
@@ -182,96 +117,128 @@ public class RecordingManager {
     }
 
     public static void tick() {
+        if (!enabled) return;
         for (Player p : Bukkit.getOnlinePlayers()) {
             getSettings(p).afkTimer++;
             if (getSettings(p).afkTimer > Reference.AFK_TIMER_LIMIT && !getSettings(p).isAFK()) {
                 setAFK(p, true);
             }
-            if (getSettings(p).isAFK()) {
-                Scoreboard s = Bukkit.getScoreboardManager().getMainScoreboard();
-                Objective o = s.getObjective("played");
-                if (o != null) {
-                    Score score = o.getScore(p.getName());
-                    score.setScore(score.getScore()-1);
+            if (getSettings(p).showScoreboard()) {
+                if (getSettings(p).isAFK()) {
+                    changePlayedScore(p, -1);
                 }
+            } else if (!getSettings(p).isAFK()) {
+                changePlayedScore(p,1);
             }
         }
     }
 
+    private static void changePlayedScore(Player p, int i) {
+        if (!enabled) return;
+        Objective played = main.getObjective("played");
+        if (played == null) {
+            played = main.registerNewObjective("played","stat.playOneMinute");
+            played.setDisplaySlot(DisplaySlot.SIDEBAR);
+            played.setDisplayName("Played");
+        }
+        Score s = played.getScore(p.getName());
+        s.setScore(s.getScore() + i);
+    }
+
     public static void setAFK(Player p, boolean b) {
+        if (!enabled) return;
         getSettings(p).setAFK(b);
-        Scoreboard s = p.getScoreboard();
         if (b) {
-            Team afk = s.getTeam("afk");
-            if (afk == null) {
-                afk = s.registerNewTeam("afk");
-                afk.setColor(ChatColor.GRAY);
-                afk.setPrefix(ChatColor.GRAY + "");
-                afk.setSuffix(ChatColor.RESET + "");
-                afk.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
-            }
-            afk.addEntry(p.getName());
-            for (Player pl : Bukkit.getOnlinePlayers()) {
-                if (!getSettings(pl).showScoreboard()) {
-                    Team r = pl.getScoreboard().getTeam("afk");
-                    if (r != null) r.addEntry(p.getName());
-                }
-            }
+            TeamType.AFK.join(p);
+        } else if (getSettings(p).isRecording()) {
+            TeamType.RECORDING.join(p);
         } else {
-            if (getSettings(p).isRecording()) {
-                Team rec = s.getTeam("recording");
-                if (rec == null) {
-                    rec = s.registerNewTeam("recording");
-                    rec.setPrefix("§c[REC] ");
-                    rec.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
-                }
-                rec.addEntry(p.getName());
-                for (Player pl : Bukkit.getOnlinePlayers()) {
-                    if (!getSettings(pl).showScoreboard()) {
-                        Team r = pl.getScoreboard().getTeam("recording");
-                        if (r != null) r.addEntry(p.getName());
-                    }
-                }
-            } else {
-                Team t = s.getTeam("team");
-                if (t == null) {
-                    t = s.registerNewTeam("team");
-                    t.setColor(ChatColor.DARK_PURPLE);
-                    t.setPrefix(ChatColor.DARK_PURPLE +"");
-                    t.setSuffix(ChatColor.RESET +"");
-                    t.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
-                }
-                t.addEntry(p.getName());
-                for (Player pl : Bukkit.getOnlinePlayers()) {
-                    if (!getSettings(pl).showScoreboard()) {
-                        Team r = pl.getScoreboard().getTeam("team");
-                        if (r != null) r.addEntry(p.getName());
-                    }
-                }
-            }
+            TeamType.DEFAULT.join(p);
         }
     }
 
     public static void setAllNotAFK() {
+        if (!enabled) return;
         for (Player p : Bukkit.getOnlinePlayers()) {
             setAFK(p,false);
         }
     }
 
     public static void playerJoin(Player p) {
-        for (Player pl : Bukkit.getOnlinePlayers()) {
-            if (!getSettings(pl).showScoreboard()) {
-                Team rec = pl.getScoreboard().getTeam("recording");
-                if (rec != null) {
-                    if (getSettings(pl).isRecording()) rec.addEntry(p.getName());
-                }
-                Team t = pl.getScoreboard().getTeam("team");
-                if (t != null) {
-                    if (!getSettings(pl).isRecording() && !getSettings(p).isAFK()) {
+        if (!enabled) return;
+        copyHealth(p);
+        TeamType.DEFAULT.join(p);
+    }
 
-                    }
-                }
+    public static void enable() {
+        enabled = true;
+        ConfigManager.config.set("recordingEnabled",true);
+        ConfigManager.saveConfig();
+        init();
+    }
+
+    public static void disable() {
+        enabled = false;
+        ConfigManager.config.set("recordingEnabled",false);
+        ConfigManager.saveConfig();
+    }
+
+    public static boolean isEnabled() {
+        return enabled;
+    }
+
+    public enum TeamType {
+        DEFAULT("team",ChatColor.DARK_PURPLE), AFK("afk",ChatColor.LIGHT_PURPLE), RECORDING("recording",ChatColor.RED);
+
+
+        private final ChatColor color;
+        private final String name;
+
+        TeamType(String name, ChatColor color) {
+            this.name = name;
+            this.color = color;
+        }
+
+        public static void initAll(Scoreboard sb) {
+            for (TeamType t : values()) {
+                t.create(sb);
             }
         }
+
+        public void create(Scoreboard sb) {
+            Team t = sb.getTeam(this.name);
+            if (t == null) {
+                t = sb.registerNewTeam(this.name);
+            }
+
+            t.setColor(color);
+            t.setPrefix(color +"");
+            t.setSuffix(ChatColor.RESET +"");
+            t.setOption(Team.Option.NAME_TAG_VISIBILITY,Team.OptionStatus.NEVER);
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public ChatColor getColor() {
+            return color;
+        }
+
+        public Team getTeam(Scoreboard sb) {
+            this.create(sb);
+            return sb.getTeam(this.name);
+        }
+
+        private void join(Scoreboard sb, Player p) {
+            Team t = getTeam(sb);
+            t.addEntry(p.getName());
+        }
+
+        public void join(Player p) {
+            this.join(main,p);
+            this.join(hiddenPlayed,p);
+        }
     }
+
 }

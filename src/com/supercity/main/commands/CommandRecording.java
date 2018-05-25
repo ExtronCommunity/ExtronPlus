@@ -24,6 +24,10 @@ public class CommandRecording implements CommandExecutor {
             p.sendMessage("SCOREBOARD: " + RecordingManager.getSettings(p).showScoreboard());
             p.sendMessage("CHAT: " + RecordingManager.getSettings(p).showChat());
             p.sendMessage("BED ALERTS: " + RecordingManager.getSettings(p).sendSleepAlerts());
+        } else if (args[0].equalsIgnoreCase("enable") && sender.isOp()) {
+            RecordingManager.enable();
+        } else if (args[0].equalsIgnoreCase("disable") && sender.isOp()) {
+            RecordingManager.disable();
         }
         return true;
     }

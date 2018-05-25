@@ -1,25 +1,25 @@
 package com.supercity.main.enchants;
 
 import com.supercity.main.event.result.DamageResult;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerItemDamageEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class CurseOfBreaking extends CustomEnchant {
-
-
+public class Lifesteal extends CustomEnchant {
     @Override
     public String getId() {
-        return "breaking_curse";
+        return "lifesteal";
     }
 
     @Override
     public String getName() {
-        return "Curse of Breaking";
+        return "Lifesteal";
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CurseOfBreaking extends CustomEnchant {
 
     @Override
     public EnchantmentTarget getTarget() {
-        return EnchantmentTarget.ALL;
+        return EnchantmentTarget.WEAPON;
     }
 
     @Override
@@ -49,16 +49,19 @@ public class CurseOfBreaking extends CustomEnchant {
 
     @Override
     public boolean isCursed() {
-        return true;
+        return false;
     }
 
     @Override
     public EnchRarity getRarity() {
-        return EnchRarity.RARE;
+        return EnchRarity.LEGENDARY;
     }
 
     @Override
-    protected DamageResult onLoseDurability(Player player, ItemStack item, int damage) {
-        return new DamageResult(false,damage * 2);
+    protected DamageResult onUseAtEntity(Player damager, Entity target, double damage) {
+        if (damager.getHealth() <= 19.0) {
+            damager.setHealth(damager.getHealth() + 1);
+        }
+        return super.onUseAtEntity(damager, target, damage);
     }
 }

@@ -1,15 +1,19 @@
 package com.supercity.main;
 
+<<<<<<< HEAD
 import com.supercity.main.commands.CommandCityCoords;
 import com.supercity.main.commands.CommandGetBackpack;
+=======
+import com.supercity.main.commands.*;
+import com.supercity.main.crafting.*;
+>>>>>>> aeb3437e8943e973cad535743372909e2c26a662
 import com.supercity.main.item.ItemBackPack;
-import com.supercity.main.commands.CommandDontSkipNight;
-import com.supercity.main.commands.CommandGetCustomItem;
-import com.supercity.main.commands.CommandReEnableOnePlayerSleep;
 import com.supercity.main.config.ConfigManager;
-import com.supercity.main.crafting.RecipeBackpack;
-import com.supercity.main.crafting.RecipeCraftingStick;
-import com.supercity.main.crafting.RecipeJetpack;
+import com.supercity.main.enchants.*;
+import com.supercity.main.event.*;
+import com.supercity.main.creepers.CommandCreeperCheck;
+import com.supercity.main.creepers.CreeperChecker;
+import com.supercity.main.creepers.CreeperEvents;
 import com.supercity.main.enchants.CurseOfBreaking;
 import com.supercity.main.enchants.HeatWalker;
 import com.supercity.main.event.ItemEnchantEvent;
@@ -22,19 +26,17 @@ import com.supercity.main.event.PlayerJoinGameEvent;
 import com.supercity.main.event.PlayerToggleShiftEvent;
 import com.supercity.main.event.custom.CustomEventListener;
 import com.supercity.main.jetpack.JetpackHandler;
+import com.supercity.main.recording.RecordingManager;
 import com.supercity.main.sleep.OnePlayerSleepHandler;
 import com.supercity.main.spawner.SpawnerMovingHandler;
-import com.supercity.main.utils.Reflection;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class SuperCity extends JavaPlugin implements Listener {
@@ -43,27 +45,30 @@ public class SuperCity extends JavaPlugin implements Listener {
     private JetpackHandler jetpackHandler;
     private OnePlayerSleepHandler onePlayerSleepHandler;
 
-    public List<Enchantment> customEnchants = new ArrayList<>();
+    public List<CustomEnchant> customEnchants = new ArrayList<>();
 
     public void onEnable() {
         INSTANCE = this;
         registerCommands();
         onePlayerSleepHandler = new OnePlayerSleepHandler();
+        ConfigManager.init();
+        RecordingManager.init();
         registerEvents();
         registerHandlers();
 
         initiatePlayers();
+        getLogger().info(ChatColor.GREEN.toString() + "Super City has been successfully loaded!");
+        //registerEnchants();
         getLogger().info(ChatColor.GREEN.toString() + "Extron Plus has been successfully loaded!");
-        registerEnchants();
-        ConfigManager.init();
         ItemBackPack.loadAllBackpacks();
 
         registerRecipes();
+        CreeperChecker.load();
     }
 
     public void onDisable() {
-        unregisterEnchants();
-        //RecordingManager.setAllNotAFK();
+        RecordingManager.setAllNotAFK();
+        CreeperChecker.save();
     }
 
     private void registerEvents() {
@@ -72,28 +77,41 @@ public class SuperCity extends JavaPlugin implements Listener {
         pm.registerEvents(new PlayerJoinGameEvent(), this);
         pm.registerEvents(new PlayerDieEvent(), this);
         pm.registerEvents(new PlayerToggleShiftEvent(), this);
-        pm.registerEvents(new ItemEnchantEvent(), this);
+        //pm.registerEvents(new ItemEnchantEvent(), this);
         pm.registerEvents(new CustomEventListener(), this);
         pm.registerEvents(new SpawnerMovingHandler(), this);
+        pm.registerEvents(new MobSpawnEvent(),this);
+        pm.registerEvents(new PlaceBlockEvent(),this);
+        pm.registerEvents(new ChatMessageEvent(),this);
+        pm.registerEvents(new PlayerMovedEvent(),this);
+        pm.registerEvents(new PlayerBreakBlock(),this);
         //pm.registerEvents(new ChatMessageEvent(),this);
         //pm.registerEvents(new PlayerMovedEvent(),this);
         pm.registerEvents(this,this);
         pm.registerEvents(onePlayerSleepHandler, this);
-        //Bukkit.getScheduler().scheduleSyncRepeatingTask(SuperCity.INSTANCE, RecordingManager::tick, 0, 1);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(SuperCity.INSTANCE, RecordingManager::tick, 0, 1);
         pm.registerEvents(new PlayerCloseInventoryEvent(), this);
         pm.registerEvents(new PlayerCraftItemEvent(), this);
         pm.registerEvents(new PlayerInteractWithInventoryEvent(), this);
+        pm.registerEvents(new CreeperEvents(),this);
     }
 
     private void registerCommands() {
         getCommand("getCustomItem").setExecutor(new CommandGetCustomItem());
         getCommand("dontSkipNight").setExecutor(new CommandDontSkipNight());
         getCommand("enableOnePlayerSleep").setExecutor(new CommandReEnableOnePlayerSleep());
+        getCommand("customEnchant").setExecutor(new CommandCustomEnchant());
+        getCommand("recording").setExecutor(new CommandRecording());
+        getCommand("togglescoreboard").setExecutor(new CommandToggleSB());
+        getCommand("togglechat").setExecutor(new CommandToggleChat());
         getCommand("getBackpack").setExecutor(new CommandGetBackpack());
         getCommand("citycoords").setExecutor(new CommandCityCoords());
         //getCommand("recording").setExecutor(new CommandRecording());
         //getCommand("togglescoreboard").setExecutor(new CommandToggleSB());
         //getCommand("togglechat").setExecutor(new CommandToggleChat());
+        getCommand("creeper").setExecutor(new CommandCreeperCheck());
+        getCommand("money").setExecutor(new CommandMoney());
+        getCommand("money").setTabCompleter(new CommandMoney());
     }
 
     private void registerHandlers() {
@@ -104,12 +122,16 @@ public class SuperCity extends JavaPlugin implements Listener {
         for(Player p : getServer().getOnlinePlayers()) {
             jetpackHandler.initiatePlayer(p);
         }
+        RecordingManager.copyHealthFromMain();
     }
 
     private void registerRecipes() {
         getServer().addRecipe(new RecipeJetpack());
         getServer().addRecipe(new RecipeCraftingStick());
         getServer().addRecipe(new RecipeBackpack());
+        getServer().addRecipe(new RecipeUncraftQuartz());
+        getServer().addRecipe(new SmeltingIncSack());
+        SmeltingConcrete.addAll();
     }
 
     public JetpackHandler getJetpackHandler() {
@@ -119,42 +141,24 @@ public class SuperCity extends JavaPlugin implements Listener {
     private void registerEnchants() {
         customEnchants.add(new CurseOfBreaking());
         customEnchants.add(new HeatWalker());
-        try {
-            Reflection.setField(null,Enchantment.class,"acceptingNew",true);
-            for (Enchantment e : customEnchants) {
-                Enchantment.registerEnchantment(e);
-                if (e instanceof Listener) {
-                    Bukkit.getPluginManager().registerEvents((Listener) e,this);
-                }
-            }
-        } catch (IllegalArgumentException ignored) {
+        customEnchants.add(new Lifesteal());
+        customEnchants.add(new IceAspect());
+        customEnchants.add(new AutoSmelt());
+        customEnchants.add(new Sniper());
+        customEnchants.add(new FancyTrail());
 
-        }
+        customEnchants.forEach(n -> Bukkit.getPluginManager().registerEvents(n,SuperCity.this));
+    }
+    public OnePlayerSleepHandler getOnePlayerSleepHandler() {
+        return onePlayerSleepHandler;
     }
 
-    private void unregisterEnchants() {
-        try {
-            HashMap<Integer, Enchantment> byId = (HashMap<Integer, Enchantment>) Reflection.getField(null, Enchantment.class, "byId");
-            HashMap<String, Enchantment> byName = (HashMap<String, Enchantment>) Reflection.getField(null, Enchantment.class, "byName");
-            for (Enchantment e : customEnchants) {
-                byId.remove(e.getId());
-                byName.remove(e.getName());
-            }
-        } catch (ClassCastException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public Enchantment getCustomEnchant(int id) {
-        for (Enchantment e : customEnchants) {
-            if (e.getId() == id) {
+    public CustomEnchant getCustomEnchant(String id) {
+        for (CustomEnchant e : customEnchants) {
+            if (e.getId().equalsIgnoreCase(id)) {
                 return e;
             }
         }
         return null;
-    }
-
-    public OnePlayerSleepHandler getOnePlayerSleepHandler() {
-        return onePlayerSleepHandler;
     }
 }

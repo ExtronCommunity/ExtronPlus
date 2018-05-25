@@ -5,6 +5,8 @@
 
 package com.supercity.main.enchants;
 
+import com.supercity.main.event.result.MoveResult;
+import com.supercity.main.item.HeatWalkerBoots;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -15,9 +17,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class HeatWalker extends Enchantment implements Listener {
-    public HeatWalker() {
-        super(101);
+public class HeatWalker extends CustomEnchant {
+
+    @Override
+    public String getId() {
+        return "heat_walker";
     }
 
     public String getName() {
@@ -28,12 +32,19 @@ public class HeatWalker extends Enchantment implements Listener {
         return 2;
     }
 
-    public int getStartLevel() {
-        return 1;
+    @Override
+    public EnchantmentTarget getTarget() {
+        return EnchantmentTarget.ARMOR_FEET;
     }
 
-    public EnchantmentTarget getItemTarget() {
-        return EnchantmentTarget.ARMOR_FEET;
+    @Override
+    public boolean hasConflict(Enchantment e) {
+        return e == Enchantment.FROST_WALKER;
+    }
+
+    @Override
+    public boolean hasConflict(CustomEnchant e) {
+        return false;
     }
 
     public boolean isTreasure() {
@@ -44,32 +55,25 @@ public class HeatWalker extends Enchantment implements Listener {
         return false;
     }
 
-    public boolean conflictsWith(Enchantment enchantment) {
-        return false;
+    @Override
+    public EnchRarity getRarity() {
+        return EnchRarity.EPIC;
     }
 
-    public boolean canEnchantItem(ItemStack itemStack) {
-        return true;
-    }
-
-    @EventHandler
-    public void onMove(PlayerMoveEvent e) {
-        Player p = e.getPlayer();
-        if (p.getInventory().getBoots() != null) {
-            ItemStack boots = p.getInventory().getBoots();
-            if (boots.containsEnchantment(this)) {
-                if (p.isOnGround()) {
-                    for(int i = -(boots.getEnchantmentLevel(this) + 3); i < boots.getEnchantmentLevel(this) + 3; ++i) {
-                        for(int j = -(boots.getEnchantmentLevel(this) + 3); j < boots.getEnchantmentLevel(this) + 3; ++j) {
-                            Location loc = p.getLocation().add((double)i, -1.0D, (double)j);
-                            if (loc.getBlock() != null && p.getLocation().distance(loc) <= (double)(boots.getEnchantmentLevel(this) + 2) && (loc.getBlock().getType() == Material.LAVA || loc.getBlock().getType() == Material.STATIONARY_LAVA)) {
-                                loc.getBlock().setType(Material.OBSIDIAN);
-                            }
-                        }
+    @Override
+    protected MoveResult onMove(Player p, Location from, Location to) {
+        if (p.isOnGround()) {
+            int level = this.getEnchantLevel(p);
+            for(int i = -(level + 3); i < level + 3; ++i) {
+                for(int j = -(level + 3); j < level + 3; ++j) {
+                    Location loc = p.getLocation().add((double)i, -1.0D, (double)j);
+                    if (loc.getBlock() != null && p.getLocation().distance(loc) <= (double)(level + 2) && (loc.getBlock().getType() == Material.LAVA || loc.getBlock().getType() == Material.STATIONARY_LAVA)) {
+                        loc.getBlock().setType(Material.OBSIDIAN);
                     }
-
                 }
             }
+
         }
+        return super.onMove(p, from, to);
     }
 }
