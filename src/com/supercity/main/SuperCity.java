@@ -1,5 +1,6 @@
 package com.supercity.main;
 
+import com.supercity.main.commands.CommandCityCoords;
 import com.supercity.main.commands.CommandGetBackpack;
 import com.supercity.main.item.ItemBackPack;
 import com.supercity.main.commands.CommandDontSkipNight;
@@ -89,6 +90,7 @@ public class SuperCity extends JavaPlugin implements Listener {
         getCommand("dontSkipNight").setExecutor(new CommandDontSkipNight());
         getCommand("enableOnePlayerSleep").setExecutor(new CommandReEnableOnePlayerSleep());
         getCommand("getBackpack").setExecutor(new CommandGetBackpack());
+        getCommand("citycoords").setExecutor(new CommandCityCoords());
         //getCommand("recording").setExecutor(new CommandRecording());
         //getCommand("togglescoreboard").setExecutor(new CommandToggleSB());
         //getCommand("togglechat").setExecutor(new CommandToggleChat());

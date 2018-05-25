@@ -28,3 +28,7 @@ commands:
     description: "Get a backpack with a set id"
     usage: "/getbackpack <id>"
     aliases: ["backpack"]
+  citycoords:
+    description: "Shows/Sets the city coordinates"
+    usage: "DISPLAY: /citycoords. SET: /citycoords here | /citycoords <x> <y> <z>"
+    aliases: ["cityc"]

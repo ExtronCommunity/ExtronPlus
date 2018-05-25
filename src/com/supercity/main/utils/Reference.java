@@ -49,6 +49,8 @@ public class Reference {
 
     public static final int ROWS_IN_BACKPACK = ConfigManager.backpackConfig.get().getInt("rows", 2);
 
+    public static final String CITY_COORDS_CONFIG_PATH = "citycoords";
+
     public enum ItemData {
         JETPACK(Material.ELYTRA, "Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),
         PICK(Material.DIAMOND_PICKAXE, "DiamondPickaxe", "BreakingPickaxe", false, PickaxeCurseOfBreaking.class, "§cCurse of Breaking"),
