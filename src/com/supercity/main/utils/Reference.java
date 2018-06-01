@@ -49,6 +49,7 @@ public class Reference {
 
     public static final String CITY_COORDS_CONFIG_PATH = "citycoords";
     public static final List<Location> TRAPPED_SIGNS_LOCATIONS = new ArrayList<>();
+    public static final int HOURS_PER_WEEK = 3;
 
     public enum ItemData {
         JETPACK(Material.ELYTRA, "Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),

@@ -113,7 +113,8 @@ public class SuperCity extends JavaPlugin implements Listener {
         getCommand("creeper").setExecutor(new CommandCreeperCheck());
         getCommand("money").setExecutor(new CommandMoney());
         getCommand("money").setTabCompleter(new CommandMoney());
-        getCommand("naknick").setExecutor(new CommandNaknick());
+        getCommand("activity").setExecutor(new CommandActivity());
+        getCommand("myactivity").setExecutor(new CommandMyActivity());
         getCommand("played").setExecutor(new CommandPlayed());
     }
 

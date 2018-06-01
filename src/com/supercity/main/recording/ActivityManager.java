@@ -1,6 +1,9 @@
 package com.supercity.main.recording;
 
 import com.supercity.main.config.ConfigManager;
+import com.supercity.main.utils.ListUtils;
+import com.supercity.main.utils.Reference;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -13,10 +16,7 @@ import org.bukkit.scoreboard.Scoreboard;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ActivityManager {
 
@@ -162,7 +162,7 @@ public class ActivityManager {
     }
 
     public static int getActivityOf(String p, int weeksAgo) throws ActivityException {
-        if (p == null || Bukkit.getOfflinePlayer(p) == null) throw new ActivityException("Unknown player " + p);
+        if (p == null || !ListUtils.containsIgnoreCase(sb.getEntries(),p)) throw new ActivityException("Unknown player " + p);
         if (weeksAgo == 0) {
             return getCurrentScore(p);
         } else {
@@ -182,13 +182,25 @@ public class ActivityManager {
     }
 
     private static void sendActivity(CommandSender sender, String p, int ticks) {
-        double d = toHours(ticks);
-        DecimalFormat format = new DecimalFormat("#,###.##");
-        ChatColor c = d < 3 ? ChatColor.RED : ChatColor.GREEN;
-        sender.sendMessage(c + p + ": " + format.format(d) + "h");
+        int h = toHours(ticks);
+        ChatColor c = h < Reference.HOURS_PER_WEEK ? ChatColor.RED : ChatColor.GREEN;
+        int m = toMinutes(ticks) - 60 * h;
+        if (h == 0) {
+            sender.sendMessage(c + p + ": " + m + "m");
+        } else {
+            sender.sendMessage(c + p + ": " + String.format("%,d",h) + (m == 0 ? "" : ":" + String.format("%02d",m)) + "h");
+        }
     }
 
-    private static double toHours(int i) {
-        return i / 20.0 / 60.0 / 60.0;
+    private static int toMinutes(int i) {
+        return (int) Math.floor(i / 20.0 / 60.0);
+    }
+
+    private static int toHours(int i) {
+        return (int) Math.floor(toMinutes(i)/60.0);
+    }
+
+    public static Set<String> getPlayers() {
+        return sb.getEntries();
     }
 }
