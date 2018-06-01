@@ -41,3 +41,5 @@ commands:
     usage: "/creeper"
     aliases: ["whoexploded","creeperinfo"]
   money:
+  naknick:
+  played:
