@@ -27,12 +27,12 @@ public class JetpackHandler {
     private List<Player> toRemove;
 
     public JetpackHandler() {
-        flying = new ArrayList<Player>();
-        toRemove = new ArrayList<Player>();
-        fuelConsumption = new HashMap<Player, Integer>();
-        fuelBars = new HashMap<Player, BossBar>();
-        initiated = new ArrayList<Player>();
-        lastMaterialConsumed = new HashMap<Player, FuelType>();
+        flying = new ArrayList<>();
+        toRemove = new ArrayList<>();
+        fuelConsumption = new HashMap<>();
+        fuelBars = new HashMap<>();
+        initiated = new ArrayList<>();
+        lastMaterialConsumed = new HashMap<>();
         Bukkit.getScheduler().scheduleSyncRepeatingTask(SuperCity.INSTANCE, this::tick, 0, 1);
         SuperCity.INSTANCE.getLogger().info("Started jetpack task, it will now repeat every tick!");
     }

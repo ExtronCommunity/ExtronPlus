@@ -3,7 +3,6 @@ package com.supercity.main.commands;
 import com.supercity.main.recording.ActivityException;
 import com.supercity.main.recording.ActivityManager;
 import com.supercity.main.utils.Reference;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -22,6 +21,9 @@ public class CommandActivity implements TabExecutor {
             if (args.length > 0) {
                 if ("previous".equalsIgnoreCase(args[0])) {
                     ActivityManager.displayLastWeek(commandSender);
+                } else if ("force_reset".equalsIgnoreCase(args[0])) {
+                    commandSender.sendMessage("Forcing reset of activity...");
+                    ActivityManager.reset();
                 } else {
                     try {
                         int i = Integer.parseInt(args[0]);
@@ -48,6 +50,7 @@ public class CommandActivity implements TabExecutor {
         List<String> list = new ArrayList<>();
         if (strings.length == 1) {
             list.add("previous");
+            list.add("force_reset");
         }
         if (strings.length < 3) {
             list.addAll(ActivityManager.getPlayers());

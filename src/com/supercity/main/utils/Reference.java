@@ -83,12 +83,12 @@ public class Reference {
         }
 
         ItemData(Material material, String displayName, String locName, Class<? extends CustomItem> itemClass) {
-            this(material, displayName, locName,itemClass, null);
+            this(material, displayName, locName,itemClass,new String[0]);
             hasLore = false;
         }
 
         ItemData(Material material, String displayName, String locName, boolean hasEnchantedGlint, Class<? extends CustomItem> itemClass) {
-            this(material, displayName, locName,hasEnchantedGlint, itemClass, null);
+            this(material, displayName, locName,hasEnchantedGlint, itemClass,new String[0]);
             hasLore = false;
         }
 
@@ -120,7 +120,6 @@ public class Reference {
             List<String> l = new ArrayList<>();
             for(ItemData data : ItemData.values()) {
                 l.add(data.locName);
-                System.out.println(data.locName);
             }
             return l;
         }

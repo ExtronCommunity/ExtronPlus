@@ -28,8 +28,6 @@ public class CommandPlayed implements CommandExecutor {
             return true;
         }
         commandSender.sendMessage("             Played");
-        int max = this.getMaxScore(sb,played);
-        int maxLen = String.valueOf(max).length();
         LinkedList<String> list = sb.getEntries().stream().sorted(Comparator.comparingInt(this::getScore)).collect(Collectors.toCollection(LinkedList::new));
         Iterator<String> iter = list.descendingIterator();
         while (iter.hasNext()) {
@@ -37,7 +35,7 @@ public class CommandPlayed implements CommandExecutor {
             OfflinePlayer p = Bukkit.getOfflinePlayer(e);
             if (p != null) {
                 Score score = played.getScore(e);
-                commandSender.sendMessage(String.format(ChatColor.AQUA + "%-18s  " + ChatColor.RED + "%" + maxLen + "d",e,score.getScore()));
+                commandSender.sendMessage(ChatColor.AQUA + e + "    " + ChatColor.RED + score.getScore());
             }
         }
         return true;

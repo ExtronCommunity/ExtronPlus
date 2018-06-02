@@ -25,9 +25,9 @@ public class CommandCreeperCheck implements CommandExecutor {
             p.sendMessage(ChatColor.RED + "No creeper explosion info found at this block.");
         } else {
             p.sendMessage(ChatColor.GREEN + "A creeper explosion was found!");
-            p.sendMessage("ID: " + info.getId());
+            p.sendMessage("  ID: " + info.getId());
             p.sendMessage("  Location: " + b.getLocation().getBlockX() + ", " + b.getLocation().getBlockY() + ", " + b.getLocation().getBlockZ());
-            p.sendMessage(String.format("Date: %1$te/%1$tB/%1$ty at %1$tH:%1$tM:%1$tS",info.getDate()));
+            p.sendMessage(String.format("  Date: %1$td/%1$tm/%1$ty at %1$tH:%1$tM:%1$tS",info.getDate()));
             p.sendMessage("  Cause: " + Bukkit.getPlayer(info.getCause()).getName());
         }
         return true;

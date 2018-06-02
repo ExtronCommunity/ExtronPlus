@@ -196,7 +196,7 @@ public class ActivityManager {
         return (int) Math.floor(i / 20.0 / 60.0);
     }
 
-    private static int toHours(int i) {
+    public static int toHours(int i) {
         return (int) Math.floor(toMinutes(i)/60.0);
     }
 
