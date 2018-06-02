@@ -49,6 +49,7 @@ public class Reference {
 
     public static final String CITY_COORDS_CONFIG_PATH = "citycoords";
     public static final List<Location> TRAPPED_SIGNS_LOCATIONS = new ArrayList<>();
+    public static final int HOURS_PER_WEEK = 3;
 
     public enum ItemData {
         JETPACK(Material.ELYTRA, "Jetpack", "itemJetpack", true, ItemJetpack.class, "§eTo use, equip it and look down", "§eYou also need some fuel in your inventory"),
@@ -82,12 +83,12 @@ public class Reference {
         }
 
         ItemData(Material material, String displayName, String locName, Class<? extends CustomItem> itemClass) {
-            this(material, displayName, locName,itemClass, null);
+            this(material, displayName, locName,itemClass,new String[0]);
             hasLore = false;
         }
 
         ItemData(Material material, String displayName, String locName, boolean hasEnchantedGlint, Class<? extends CustomItem> itemClass) {
-            this(material, displayName, locName,hasEnchantedGlint, itemClass, null);
+            this(material, displayName, locName,hasEnchantedGlint, itemClass,new String[0]);
             hasLore = false;
         }
 
@@ -119,7 +120,6 @@ public class Reference {
             List<String> l = new ArrayList<>();
             for(ItemData data : ItemData.values()) {
                 l.add(data.locName);
-                System.out.println(data.locName);
             }
             return l;
         }

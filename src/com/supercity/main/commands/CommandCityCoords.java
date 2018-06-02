@@ -2,6 +2,7 @@ package com.supercity.main.commands;
 
 import com.supercity.main.config.ConfigManager;
 import com.supercity.main.utils.Reference;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,7 +16,8 @@ public class CommandCityCoords implements CommandExecutor {
             int x = ConfigManager.cityDataConfig.get().getInt(Reference.CITY_COORDS_CONFIG_PATH + ".x");
             int y = ConfigManager.cityDataConfig.get().getInt(Reference.CITY_COORDS_CONFIG_PATH + ".y");
             int z = ConfigManager.cityDataConfig.get().getInt(Reference.CITY_COORDS_CONFIG_PATH + ".z");
-            commandSender.sendMessage("The city coords are: " + x + " " + y + " " + z);
+            commandSender.sendMessage("The city coords are: ");
+            commandSender.sendMessage(ChatColor.GREEN + "" + x + " " + y + " " + z);
         } else if(commandSender instanceof Player) {
             Player p = (Player) commandSender;
             int x;

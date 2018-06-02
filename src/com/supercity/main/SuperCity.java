@@ -22,6 +22,7 @@ import com.supercity.main.event.PlayerJoinGameEvent;
 import com.supercity.main.event.PlayerToggleShiftEvent;
 import com.supercity.main.event.custom.CustomEventListener;
 import com.supercity.main.jetpack.JetpackHandler;
+import com.supercity.main.recording.ActivityManager;
 import com.supercity.main.recording.RecordingManager;
 import com.supercity.main.sleep.OnePlayerSleepHandler;
 import com.supercity.main.spawner.SpawnerMovingHandler;
@@ -49,6 +50,7 @@ public class SuperCity extends JavaPlugin implements Listener {
         onePlayerSleepHandler = new OnePlayerSleepHandler();
         ConfigManager.init();
         RecordingManager.init();
+        ActivityManager.init();
         registerEvents();
         registerHandlers();
 
@@ -64,6 +66,7 @@ public class SuperCity extends JavaPlugin implements Listener {
 
     public void onDisable() {
         RecordingManager.setAllNotAFK();
+        ActivityManager.save();
         CreeperChecker.save();
     }
 
@@ -85,11 +88,16 @@ public class SuperCity extends JavaPlugin implements Listener {
         //pm.registerEvents(new PlayerMovedEvent(),this);
         pm.registerEvents(this,this);
         pm.registerEvents(onePlayerSleepHandler, this);
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(SuperCity.INSTANCE, RecordingManager::tick, 0, 1);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(INSTANCE, this::tick, 0, 1);
         pm.registerEvents(new PlayerCloseInventoryEvent(), this);
         pm.registerEvents(new PlayerCraftItemEvent(), this);
         pm.registerEvents(new PlayerInteractWithInventoryEvent(), this);
         pm.registerEvents(new CreeperEvents(),this);
+    }
+
+    private void tick() {
+        RecordingManager.tick();
+        ActivityManager.tick();
     }
 
     private void registerCommands() {
@@ -102,12 +110,12 @@ public class SuperCity extends JavaPlugin implements Listener {
         getCommand("togglechat").setExecutor(new CommandToggleChat());
         getCommand("getBackpack").setExecutor(new CommandGetBackpack());
         getCommand("citycoords").setExecutor(new CommandCityCoords());
-        //getCommand("recording").setExecutor(new CommandRecording());
-        //getCommand("togglescoreboard").setExecutor(new CommandToggleSB());
-        //getCommand("togglechat").setExecutor(new CommandToggleChat());
         getCommand("creeper").setExecutor(new CommandCreeperCheck());
         getCommand("money").setExecutor(new CommandMoney());
         getCommand("money").setTabCompleter(new CommandMoney());
+        getCommand("activity").setExecutor(new CommandActivity());
+        getCommand("myactivity").setExecutor(new CommandMyActivity());
+        getCommand("played").setExecutor(new CommandPlayed());
     }
 
     private void registerHandlers() {
