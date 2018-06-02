@@ -6,6 +6,7 @@ import com.supercity.main.utils.Reference;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,11 @@ public class CommandActivity implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (!commandSender.isOp()) {
-            commandSender.sendMessage(Reference.CANT_USE_COMMAND);
+            System.out.println("HERE!");
+            if(commandSender instanceof Player)
+                ((Player) commandSender).performCommand("myactivity");
+            else
+                commandSender.sendMessage(Reference.CANT_USE_COMMAND);
             return true;
         }
         try {

@@ -1,10 +1,11 @@
 package com.supercity.main.creepers;
 
-import com.supercity.main.creepers.CreeperChecker;
 import org.bukkit.entity.Creeper;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.*;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 
 public class CreeperEvents implements Listener {
 

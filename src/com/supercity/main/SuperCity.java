@@ -57,7 +57,6 @@ public class SuperCity extends JavaPlugin implements Listener {
         initiatePlayers();
         getLogger().info(ChatColor.GREEN.toString() + "Super City has been successfully loaded!");
         //registerEnchants();
-        getLogger().info(ChatColor.GREEN.toString() + "Extron Plus has been successfully loaded!");
         ItemBackPack.loadAllBackpacks();
 
         registerRecipes();

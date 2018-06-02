@@ -1,18 +1,15 @@
 package com.supercity.main.commands;
 
-import com.supercity.main.recording.ActivityManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.libs.it.unimi.dsi.fastutil.ints.IntComparator;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 
-import java.util.ArrayDeque;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -32,10 +29,19 @@ public class CommandPlayed implements CommandExecutor {
         Iterator<String> iter = list.descendingIterator();
         while (iter.hasNext()) {
             String e = iter.next();
-            OfflinePlayer p = Bukkit.getOfflinePlayer(e);
+            OfflinePlayer p = Bukkit.getPlayer(e);
             if (p != null) {
                 Score score = played.getScore(e);
-                commandSender.sendMessage(ChatColor.AQUA + e + "    " + ChatColor.RED + score.getScore());
+                int iScore = score.getScore();
+                String msg = ChatColor.AQUA + e;
+                int spacesToAdd = 16 - e.length() + 6;
+                StringBuilder builder = new StringBuilder(msg);
+                for(int i = 0; i < spacesToAdd; i++) {
+                    builder.append(" ");
+                }
+                builder.append(ChatColor.RED);
+                builder.append(iScore);
+                commandSender.sendMessage(builder.toString());
             }
         }
         return true;
